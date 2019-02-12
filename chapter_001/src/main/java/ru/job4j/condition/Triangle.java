@@ -60,6 +60,6 @@ public class Triangle {
      * @return возможно ли построить.
      */
     private boolean exist(double ab, double ac, double bc) {
-        return (ab + ac) > bc || (ac + bc) > ab || (ab + bc) > ac;
+        return (ab + ac) > bc && (ac + bc) > ab && (ab + bc) > ac;
     }
 }
