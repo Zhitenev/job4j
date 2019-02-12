@@ -19,4 +19,34 @@ public class MaxTest {
         int result = maxim.max(1, 2);
         assertThat(result, is(2));
     }
+
+    /**
+     * Test нахождения максимума из 3х.
+     */
+    @Test
+    public void whenThreeUnitMaxLast() {
+        Max maxim = new Max();
+        int result = maxim.max(1, 2, 3);
+        assertThat(result, is(3));
+    }
+
+    /**
+     * Test нахождения максимума из 3х.
+     */
+    @Test
+    public void whenThreeUnitMaxFirst() {
+        Max maxim = new Max();
+        int result = maxim.max(3, 2, 1);
+        assertThat(result, is(3));
+    }
+
+    /**
+     * Test нахождения максимума из 3х.
+     */
+    @Test
+    public void whenThreeUnitMaxMidle() {
+        Max maxim = new Max();
+        int result = maxim.max(1, 3, 2);
+        assertThat(result, is(3));
+    }
 }
