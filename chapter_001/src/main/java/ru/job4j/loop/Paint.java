@@ -1,4 +1,7 @@
 package ru.job4j.loop;
+
+import java.util.function.BiPredicate;
+
 /**
  *Отрисовка пирамиды.
  *@author Oleg Zhieten
@@ -7,58 +10,54 @@ package ru.job4j.loop;
  */
 public class Paint {
     /**
-     * Строим правую часть треугольника.
-     * @param height высота построения.
-     * @return символьный результат.
+     * Построение правой стороны треугольника используя лямды.
+     * @param height высота треугольника.
+     * @return псеводографическая фигура.
      */
     public String rightTrl(int height) {
-        StringBuilder screen = new StringBuilder();
-        int width = height;
-        for (int row = 0; row != height; row++) {
-            for (int column = 0; column != width; column++) {
-                if (row >= column) {
-                    screen.append("^");
-                } else {
-                    screen.append(" ");
-                }
-            }
-            screen.append(System.lineSeparator());
-        }
-        return screen.toString();
+        return this.loopBy(
+                height,
+                height,
+                (row, column) -> row >= column
+        );
     }
-
     /**
-     * Строим левую часть треугольника.
-     * @param height выстота построения.
-     * @return символьный результат.
+     * Построение левой стороны треугольника используя лямды.
+     * @param height высота треугольника.
+     * @return псеводографическая фигура.
      */
     public String leftTrl(int height) {
-        StringBuilder screen = new StringBuilder();
-        int width = height;
-        for (int row = 0; row != height; row++) {
-            for (int column = 0; column != width; column++) {
-                if (row >= width - column - 1) {
-                    screen.append("^");
-                } else {
-                    screen.append(" ");
-                }
-            }
-            screen.append(System.lineSeparator());
-        }
-        return screen.toString();
+        return this.loopBy(
+                height,
+                height,
+                (row, column) -> row >= height - column - 1
+        );
+    }
+    /**
+     * Построение треугольника используя лямды.
+     * @param height высота треугольника.
+     * @return псеводографическая фигура.
+     */
+    public String pyramid(int height) {
+        return this.loopBy(
+                height,
+                2 * height - 1,
+                (row, column) -> row >= height - column - 1 && row + height - 1 >= column
+        );
     }
 
     /**
-     * Строим треугольник.
-     * @param height высота построения треугольника.
-     * @return симворльный результат.
+     * Реальзация построния с использованием дженериков.
+     * @param height высота построения.
+     * @param widht ширина для передачи в лямды.
+     * @param predict выполнение условий.
+     * @return псефтографическая фигура.
      */
-    public String pyramid(int height) {
+    private String loopBy(int height, int widht, BiPredicate<Integer, Integer> predict) {
         StringBuilder screen = new StringBuilder();
-        int width = 2 * height - 1;
         for (int row = 0; row != height; row++) {
-            for (int column = 0; column != width; column++) {
-                if (row >= height - column - 1 && row + height - 1 >= column) {
+            for (int column = 0; column != widht; column++) {
+                if (predict.test(row, column)) {
                     screen.append("^");
                 } else {
                     screen.append(" ");
