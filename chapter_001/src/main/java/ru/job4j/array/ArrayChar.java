@@ -26,14 +26,12 @@ public class ArrayChar {
      */
     public boolean startWith(String prefix) {
         boolean result = true;
-        int i = 0;
         char[] value = prefix.toCharArray();
-            for (char chr : value) {
-                result = chr == data[i++];
-                if (!result) {
-                    break;
-                }
+        for (int i = 0; i < value.length; i++) {
+            if (value[i] != data[i]) {
+                result = false;
             }
+        }
         return result;
     }
 }
