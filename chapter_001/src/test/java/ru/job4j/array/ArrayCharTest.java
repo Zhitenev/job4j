@@ -29,4 +29,14 @@ public class ArrayCharTest {
         boolean result = word.startWith("Hi");
         assertThat(result, is(false));
     }
+
+    /**
+     * Тест когда не совподает с более длинным словом.
+     */
+    @Test
+    public void whenNotStartWithPrefixFalse() {
+        ArrayChar word = new ArrayChar("Hello");
+        boolean result = word.startWith("Hill");
+        assertThat(result, is(false));
+    }
 }

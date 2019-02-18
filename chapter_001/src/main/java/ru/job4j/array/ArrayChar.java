@@ -30,6 +30,9 @@ public class ArrayChar {
         char[] value = prefix.toCharArray();
             for (char chr : value) {
                 result = chr == data[i++];
+                if (!result) {
+                    break;
+                }
             }
         return result;
     }

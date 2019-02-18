@@ -31,4 +31,26 @@ public class CheckTest {
         boolean result = check.mono(input);
         assertThat(result, is(false));
     }
+
+    /**
+     * Тест более длинного массива.
+     */
+    @Test
+    public void whenDataNotMonoByTrueThenFalseSecond() {
+        Check check = new Check();
+        boolean[] input = new boolean[] {true, false, true, true, true, true, true};
+        boolean result = check.mono(input);
+        assertThat(result, is(false));
+    }
+
+    /**
+     * Тест когда массив не однородный.
+     */
+    @Test
+    public void whenDataNotMonoByFalse() {
+        Check check = new Check();
+        boolean[] input = new boolean[] {false, false, false};
+        boolean result = check.mono(input);
+        assertThat(result, is(true));
+    }
 }
