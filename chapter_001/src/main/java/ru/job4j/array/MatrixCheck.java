@@ -20,6 +20,7 @@ public class MatrixCheck {
             for (int j = 0; j < data.length; j++) {
                 if (i == j && lineOne != data[i][j] || i + j == data.length - 1 && lineTwo != data[i][j]) {
                     result = false;
+                    break;
                 }
             }
         }
