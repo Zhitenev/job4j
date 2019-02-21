@@ -80,8 +80,7 @@ public class Logic {
                     }
                 }
             }
-            boolean result = resultOne || resultSecond;
-        return result;
+        return resultOne || resultSecond;
     }
 
     public int[][] convert() {
