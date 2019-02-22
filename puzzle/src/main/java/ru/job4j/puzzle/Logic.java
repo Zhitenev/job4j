@@ -79,6 +79,9 @@ public class Logic {
                         resultSecond = false;
                     }
                 }
+                if (resultOne || resultSecond) {
+                    break;
+                }
             }
         return resultOne || resultSecond;
     }
