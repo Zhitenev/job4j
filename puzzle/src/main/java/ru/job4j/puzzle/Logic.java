@@ -67,10 +67,10 @@ public class Logic {
     }
 
     public boolean isWin() {
-        boolean resultOne = true;
-        boolean resultSecond = true;
         int[][] table = this.convert();
+        boolean result = false;
             for (int i = 0; i < table.length; i++) {
+                boolean resultOne = true, resultSecond = true;
                 for (int j = 0; j < table.length - 1; j++) {
                     if (table[i][j] != table[i][j + 1]) {
                         resultOne = false;
@@ -80,10 +80,11 @@ public class Logic {
                     }
                 }
                 if (resultOne || resultSecond) {
+                     result = true;
                     break;
                 }
             }
-        return resultOne || resultSecond;
+        return result;
     }
 
     public int[][] convert() {
