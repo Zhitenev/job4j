@@ -72,10 +72,10 @@ public class Logic {
             for (int i = 0; i < table.length; i++) {
                 boolean resultOne = true, resultSecond = true;
                 for (int j = 0; j < table.length - 1; j++) {
-                    if (table[i][j] != table[i][j + 1]) {
+                    if (table[i][j] != 1 || table[i][j] != table[i][j + 1]) {
                         resultOne = false;
                     }
-                    if (table[j][i] != table[j + 1][i]) {
+                    if (table[j][i] != 1 || table[j][i] != table[j + 1][i]) {
                         resultSecond = false;
                     }
                 }
