@@ -27,16 +27,16 @@ public class SortArrays {
                 result[i] = firsArray[a];
                 firsArray[a] = a == fLen - 1 ? max : firsArray[a];
                 a = a < (fLen - 1) ? ++a : a;
-                } else if (min == secondArray[b]) {
-                    result[i] = secondArray[b];
-                    secondArray[b] = b == sLen - 1 ? max : secondArray[b];
-                    b = b < (sLen - 1) ? ++b : b;
-                    } else if (min == thirdArray[c]) {
-                        result[i] = thirdArray[c];
-                        thirdArray[c] = c == tLen - 1 ? max : thirdArray[c];
-                        c = c < tLen - 1 ? ++c : c;
+            } else if (min == secondArray[b]) {
+                result[i] = secondArray[b];
+                secondArray[b] = b == sLen - 1 ? max : secondArray[b];
+                b = b < (sLen - 1) ? ++b : b;
+            } else if (min == thirdArray[c]) {
+                result[i] = thirdArray[c];
+                thirdArray[c] = c == tLen - 1 ? max : thirdArray[c];
+                c = c < tLen - 1 ? ++c : c;
             }
         }
-    return result;
+        return result;
     }
 }
