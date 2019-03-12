@@ -58,14 +58,13 @@ public class Tracker {
      */
     public boolean replace(String id, Item item) {
         boolean result = false;
-        int i = 0;
-        for (Item itemF: this.items) {
-            if (id != null && id.equals(itemF.getId())){
+
+        for (int i = 0; i < position; i++) {
+            if (id != null && id.equals(this.items[i].getId())){
                 this.items[i] = item;
                 result = true;
                 break;
             }
-            i++;
         }
         return result;
     }
@@ -91,15 +90,15 @@ public class Tracker {
      * @return элементы с искомым именем.
      */
     public Item[] findByName(String key) {
-        Item result[] = new Item[position];
+        Item[] res = new Item[position];
         int j = 0;
         for (int i = 0; i < position; i++) {
             if (key != null && key.equals(this.items[i].getName())){
-                result[j++] = this.items[i];
+                res[j++] = this.items[i];
             }
         }
 
-        return Arrays.copyOf(result, j);
+        return Arrays.copyOf(res, j);
     }
 
     /**
@@ -114,8 +113,7 @@ public class Tracker {
             }
             i++;
         }
-        Item result[] = Arrays.copyOf(this.items, i);
-        return result;
+        return Arrays.copyOf(this.items, i);
     }
     /**
      * Метод генерирует уникальный ключ для заявки.
