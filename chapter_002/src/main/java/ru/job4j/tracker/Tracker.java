@@ -42,7 +42,7 @@ public class Tracker {
         Item[] tmp = new Item[100];
         for (Item item: this.items) {
             if (id != null && id.equals(item.getId())) {
-                System.arraycopy(this.items, i + 1 , tmp, 0, position);
+                System.arraycopy(this.items, i + 1, tmp, 0, position);
                 System.arraycopy(tmp, 0, this.items, i, position - 1);
                 this.items[--position] = null;
                 result = true;
@@ -63,7 +63,7 @@ public class Tracker {
         boolean result = false;
 
         for (int i = 0; i < position; i++) {
-            if (id != null && id.equals(this.items[i].getId())){
+            if (id != null && id.equals(this.items[i].getId())) {
                 item.setId(this.items[i].getId());
                 item.setTime(this.items[i].getTime());
                 this.items[i] = item;
@@ -81,7 +81,7 @@ public class Tracker {
     public Item findById(String id) {
         Item result = null;
         for (Item item: this.items) {
-            if (id != null && id.equals(item.getId())){
+            if (id != null && id.equals(item.getId())) {
                 result = item;
                 break;
             }
@@ -98,7 +98,7 @@ public class Tracker {
         Item[] res = new Item[position];
         int j = 0;
         for (int i = 0; i < position; i++) {
-            if (key != null && key.equals(this.items[i].getName())){
+            if (key != null && key.equals(this.items[i].getName())) {
                 res[j++] = this.items[i];
             }
         }
@@ -126,7 +126,7 @@ public class Tracker {
      * @return Уникальный ключ.
      */
     private String generateId() {
-        Random RN = new Random();
-        return String.valueOf(System.currentTimeMillis() + RN.nextInt(100));
+        Random rn = new Random();
+        return String.valueOf(System.currentTimeMillis() + rn.nextInt(100));
     }
 }

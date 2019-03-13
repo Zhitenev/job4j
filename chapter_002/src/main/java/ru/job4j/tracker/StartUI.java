@@ -64,17 +64,17 @@ public class StartUI {
             String answer = this.input.ask("Введите пункт меню : ");
             if (ADD.equals(answer)) {
                 this.createItem();
-            } else if (SHOWALL.equals(answer)){
+            } else if (SHOWALL.equals(answer)) {
                 this.showItem();
-            } else if (EDIT.equals(answer)){
+            } else if (EDIT.equals(answer)) {
                 this.editItem();
-            }else if (DELETE.equals(answer)){
+            } else if (DELETE.equals(answer)) {
                 this.deleteItem();
-            }else if (FINDID.equals(answer)){
+            } else if (FINDID.equals(answer)) {
                 this.findIdItem();
-            }else if (FINDNAME.equals(answer)){
+            } else if (FINDNAME.equals(answer)) {
                 this.findNameItem();
-            }   else if (EXIT.equals(answer)) {
+            } else if (EXIT.equals(answer)) {
                 exit = true;
             }
         }

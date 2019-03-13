@@ -6,7 +6,7 @@ package ru.job4j.profession;
  *@version 2
  */
 public class Doctor extends Profession {
-    public Diagnose heal (Pacient pacient) {
+    public Diagnose heal(Pacient pacient) {
         Doctor doc = new Doctor();
         String docName = doc.getName();
         Diagnose diagnose = new Diagnose();

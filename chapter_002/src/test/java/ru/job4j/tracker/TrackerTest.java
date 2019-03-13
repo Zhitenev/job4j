@@ -19,7 +19,7 @@ public class TrackerTest {
     public void whenAddNewItemThenTrackerHasSameItem() {
         Tracker tracker = new Tracker();
         long created = System.currentTimeMillis();
-        Item item = new Item("test1","testDescription",created);
+        Item item = new Item("test1", "testDescription", created);
         tracker.add(item);
         Item result = tracker.findById(item.getId());
         assertThat(result.getName(), is(item.getName()));
@@ -32,9 +32,9 @@ public class TrackerTest {
     public void whenDeleteItemFromTracker() {
         Tracker tracker = new Tracker();
         long created = System.currentTimeMillis();
-        Item item = new Item("test1","testDescription",created);
-        Item itemTwo = new Item("test2","testDescription2",created);
-        Item itemThree = new Item("test3","testDescription3",created);
+        Item item = new Item("test1", "testDescription", created);
+        Item itemTwo = new Item("test2", "testDescription2", created);
+        Item itemThree = new Item("test3", "testDescription3", created);
         tracker.add(item);
         tracker.add(itemTwo);
         tracker.add(itemThree);
@@ -48,9 +48,9 @@ public class TrackerTest {
     @Test
     public void whenReplaceNameThenReturnNewName() {
         Tracker tracker = new Tracker();
-        Item previous = new Item("test1","testDescription",123L);
+        Item previous = new Item("test1", "testDescription", 123L);
         tracker.add(previous);
-        Item next = new Item("test2","testDescription2",1234L);
+        Item next = new Item("test2", "testDescription2", 1234L);
         next.setId(previous.getId());
         tracker.replace(previous.getId(), next);
         assertThat(tracker.findById(previous.getId()).getName(), is("test2"));
@@ -63,10 +63,10 @@ public class TrackerTest {
     public void whenDeleteItemFromTrackerTwo() {
         Tracker tracker = new Tracker();
         long created = System.currentTimeMillis();
-        Item item = new Item("test1","testDescription",created);
-        Item itemTwo = new Item("test2","testDescription2",created);
-        Item itemThree = new Item("test3","testDescription3",created);
-        Item itemFour = new Item("test4","testDescription4",created);
+        Item item = new Item("test1", "testDescription", created);
+        Item itemTwo = new Item("test2", "testDescription2", created);
+        Item itemThree = new Item("test3", "testDescription3", created);
+        Item itemFour = new Item("test4", "testDescription4", created);
         tracker.add(item);
         tracker.add(itemTwo);
         tracker.add(itemThree);
@@ -82,10 +82,10 @@ public class TrackerTest {
     public void whenDeleteItemFromTrackerThree() {
         Tracker tracker = new Tracker();
         long created = System.currentTimeMillis();
-        Item item = new Item("test1","testDescription",created);
-        Item itemTwo = new Item("test2","testDescription2",created);
-        Item itemThree = new Item("test3","testDescription3",created);
-        Item itemFour = new Item("test4","testDescription4",created);
+        Item item = new Item("test1", "testDescription", created);
+        Item itemTwo = new Item("test2", "testDescription2", created);
+        Item itemThree = new Item("test3", "testDescription3", created);
+        Item itemFour = new Item("test4", "testDescription4", created);
         tracker.add(item);
         tracker.add(itemTwo);
         tracker.add(itemThree);
@@ -101,10 +101,10 @@ public class TrackerTest {
     public void whenDeleteItemFromTrackerFour() {
         Tracker tracker = new Tracker();
         long created = System.currentTimeMillis();
-        Item item = new Item("test1","testDescription",created);
-        Item itemTwo = new Item("test2","testDescription2",created);
-        Item itemThree = new Item("test3","testDescription3",created);
-        Item itemFour = new Item("test4","testDescription4",created);
+        Item item = new Item("test1", "testDescription", created);
+        Item itemTwo = new Item("test2", "testDescription2", created);
+        Item itemThree = new Item("test3", "testDescription3", created);
+        Item itemFour = new Item("test4", "testDescription4", created);
         tracker.add(item);
         tracker.add(itemTwo);
         tracker.add(itemThree);
@@ -120,10 +120,10 @@ public class TrackerTest {
     public void whenFindAllItemFromTracker() {
         Tracker tracker = new Tracker();
         long created = System.currentTimeMillis();
-        Item item = new Item("test1","testDescription",created);
-        Item itemTwo = new Item("test2","testDescription2",created);
-        Item itemThree = new Item("test3","testDescription3",created);
-        Item itemFour = new Item("test4","testDescription4",created);
+        Item item = new Item("test1", "testDescription", created);
+        Item itemTwo = new Item("test2", "testDescription2", created);
+        Item itemThree = new Item("test3", "testDescription3", created);
+        Item itemFour = new Item("test4", "testDescription4", created);
         tracker.add(item);
         tracker.add(itemTwo);
         tracker.add(itemThree);
@@ -138,10 +138,10 @@ public class TrackerTest {
     public void whenFindByNameItemFromTracker() {
         Tracker tracker = new Tracker();
         long created = System.currentTimeMillis();
-        Item item = new Item("test1","testDescription",created);
-        Item itemTwo = new Item("test2","testDescription2",created);
-        Item itemThree = new Item("test1","testDescription3",created);
-        Item itemFour = new Item("test4","testDescription4",created);
+        Item item = new Item("test1", "testDescription", created);
+        Item itemTwo = new Item("test2", "testDescription2", created);
+        Item itemThree = new Item("test1", "testDescription3", created);
+        Item itemFour = new Item("test4", "testDescription4", created);
         tracker.add(item);
         tracker.add(itemTwo);
         tracker.add(itemThree);
@@ -156,10 +156,10 @@ public class TrackerTest {
     public void whenFindByIdItemFromTracker() {
         Tracker tracker = new Tracker();
         long created = System.currentTimeMillis();
-        Item item = new Item("test1","testDescription",created);
-        Item itemTwo = new Item("test2","testDescription2",created);
-        Item itemThree = new Item("test1","testDescription3",created);
-        Item itemFour = new Item("test4","testDescription4",created);
+        Item item = new Item("test1", "testDescription", created);
+        Item itemTwo = new Item("test2", "testDescription2", created);
+        Item itemThree = new Item("test1", "testDescription3", created);
+        Item itemFour = new Item("test4", "testDescription4", created);
         tracker.add(item);
         tracker.add(itemTwo);
         tracker.add(itemThree);

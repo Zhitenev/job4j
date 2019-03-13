@@ -6,7 +6,7 @@ package ru.job4j.profession;
  *@version 2
  */
 public class Engineer extends Profession {
-    public void build (House house) {
+    public void build(House house) {
         Engineer engineer = new Engineer();
         String nameEng = engineer.getName();
     }
