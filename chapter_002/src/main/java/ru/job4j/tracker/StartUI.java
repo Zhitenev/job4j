@@ -137,9 +137,12 @@ public class StartUI {
     private void findIdItem() {
         System.out.println("------------ Поиск заявки по ИД --------------");
         String id = this.input.ask("Введите ИД заявки");
-        Item item = this.tracker.findById(id);
-        System.out.println("--- ИД заявки : " + item.getId() + " --- Имя завки:" + item.getName() + " --- Описание:" + item.getDecs());
-
+        if (this.tracker.findById(id) != null) {
+            Item item = this.tracker.findById(id);
+            System.out.println("--- ИД заявки : " + item.getId() + " --- Имя завки:" + item.getName() + " --- Описание:" + item.getDecs());
+        } else {
+            System.out.println("------------ Неверный ИД --------------");
+        }
     }
 
     /**
