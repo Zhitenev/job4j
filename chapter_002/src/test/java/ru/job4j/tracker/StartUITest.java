@@ -1,6 +1,12 @@
 package ru.job4j.tracker;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -12,6 +18,38 @@ import static org.junit.Assert.assertThat;
  */
 
 public class StartUITest {
+
+    private final PrintStream stdout = System.out;
+    private final ByteArrayOutputStream out = new ByteArrayOutputStream();
+
+    private static final String MENU = new StringBuilder()
+            .append("Меню.")
+            .append(System.lineSeparator())
+            .append("0. Добавление новой заяки")
+            .append(System.lineSeparator())
+            .append("1. Показать все заявки")
+            .append(System.lineSeparator())
+            .append("2. Редактировать заявку")
+            .append(System.lineSeparator())
+            .append("3. Удалить заявку")
+            .append(System.lineSeparator())
+            .append("4. Найти заявку по ИД")
+            .append(System.lineSeparator())
+            .append("5. Найти завки по имени")
+            .append(System.lineSeparator())
+            .append("6. Выход")
+            .append(System.lineSeparator())
+            .toString();
+
+    @Before
+    public void loadOutput() {
+        System.setOut(new PrintStream(this.out));
+    }
+    @After
+    public void backOutput() {
+        System.setOut(this.stdout);
+    }
+
     /**
      * Проверяем добавление заявки.
      */
@@ -44,5 +82,71 @@ public class StartUITest {
         Input input = new StubInput(new String[]{"3", item.getId(), "6"});
         new StartUI(input, tracker).init();
         assertThat(tracker.findAll()[0].getName(), is(itemTwo.getName()));
+    }
+    /**
+     * Проверяем поиск заявки по ИД.
+     */
+    @Test
+    public void whenFindByIdThenTrackerHasUpdatedValue() {
+        Tracker tracker = new Tracker();
+        Item item = tracker.add(new Item("test name", "desc"));
+        Input input = new StubInput(new String[]{"4", item.getId(), "6"});
+        new StartUI(input, tracker).init();
+        assertThat(new String(out.toByteArray()),
+                is(
+                        new StringBuilder()
+                                .append(MENU)
+                                .append("------------ Поиск заявки по ИД --------------")
+                                .append(System.lineSeparator())
+                                .append("--- ИД заявки : " + item.getId() + " --- Имя завки:test name --- Описание:desc")
+                                .append(System.lineSeparator())
+                                .append(MENU)
+                                .toString()
+                )
+        );
+    }
+    /**
+     * Проверяем показать все заявки.
+     */
+    @Test
+    public void whenFindFindAllThenTrackerHasUpdatedValue() {
+        Tracker tracker = new Tracker();
+        Item item = tracker.add(new Item("test name", "desc"));
+        Input input = new StubInput(new String[]{"1", "6"});
+        new StartUI(input, tracker).init();
+        assertThat(new String(out.toByteArray()),
+                is(
+                        new StringBuilder()
+                                .append(MENU)
+                                .append("--- ИД заявки : " + item.getId() + " --- Имя завки:test name --- Описание:desc")
+                                .append(System.lineSeparator())
+                                .append(MENU)
+                                .toString()
+                )
+        );
+    }
+    /**
+     * Проверяем поиск по имени.
+     */
+    @Test
+    public void whenFindFindNameThenTrackerHasUpdatedValue() {
+        Tracker tracker = new Tracker();
+        Item item = tracker.add(new Item("test name", "desc"));
+        Input input = new StubInput(new String[]{"5", "test name", "6"});
+        new StartUI(input, tracker).init();
+        assertThat(new String(out.toByteArray()),
+                is(
+                        new StringBuilder()
+                                .append(MENU)
+                                .append("------------ Поиск заявок по имени --------------")
+                                .append(System.lineSeparator())
+                                .append("------------ Найденые заявки --------------")
+                                .append(System.lineSeparator())
+                                .append("--- ИД заявки : " + item.getId() + " --- Имя завки:test name --- Описание:desc")
+                                .append(System.lineSeparator())
+                                .append(MENU)
+                                .toString()
+                )
+        );
     }
 }
