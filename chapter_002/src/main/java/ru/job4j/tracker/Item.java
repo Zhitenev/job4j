@@ -41,11 +41,11 @@ public class Item {
         this.name = name;
     }
 
-    public String getDecs() {
+    public String getDesc() {
         return decs;
     }
 
-    public void setDecs(String decs) {
+    public void setDesc(String decs) {
         this.decs = decs;
     }
 
