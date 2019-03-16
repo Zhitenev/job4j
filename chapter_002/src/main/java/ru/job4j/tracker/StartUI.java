@@ -173,10 +173,10 @@ public class StartUI {
 
         @Override
         public void execute(Input input, Tracker tracker) {
+            Item item;
             System.out.println("------------ Поиск заявки по ИД --------------");
             String id = input.ask("Введите ИД заявки");
-            if (tracker.findById(id) != null) {
-                Item item = tracker.findById(id);
+            if ((item = tracker.findById(id)) != null) {
                 System.out.println("--- ИД заявки : " + item.getId() + " --- Имя завки:" + item.getName() + " --- Описание:" + item.getDesc());
             } else {
                 System.out.println("------------ Неверный ИД --------------");
