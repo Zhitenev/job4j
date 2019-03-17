@@ -81,8 +81,4 @@ public class Item {
     public int hashCode() {
         return Objects.hash(id, name, decs, time);
     }
-
-    public String toString(Item item) {
-        return  "--- ИД заявки : " + item.getId() + " --- Имя завки:" + item.getName() + " --- Описание:" + item.getDesc();
-    }
 }
