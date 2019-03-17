@@ -105,7 +105,7 @@ public class StartUI {
         @Override
         public void execute(Input input, Tracker tracker) {
             for (Item item: tracker.findAll()) {
-                System.out.println("--- ИД заявки : " + item.getId() + " --- Имя завки:" + item.getName() + " --- Описание:" + item.getDesc());
+                System.out.println(item);
             }
         }
 
@@ -173,11 +173,12 @@ public class StartUI {
 
         @Override
         public void execute(Input input, Tracker tracker) {
-            Item item;
+
             System.out.println("------------ Поиск заявки по ИД --------------");
             String id = input.ask("Введите ИД заявки");
-            if ((item = tracker.findById(id)) != null) {
-                System.out.println("--- ИД заявки : " + item.getId() + " --- Имя завки:" + item.getName() + " --- Описание:" + item.getDesc());
+            Item item = tracker.findById(id);
+            if (item != null) {
+                System.out.println(item);
             } else {
                 System.out.println("------------ Неверный ИД --------------");
             }
@@ -202,7 +203,7 @@ public class StartUI {
             Item[] tmp = tracker.findByName(name);
             System.out.println("------------ Найденые заявки --------------");
             for (Item item : tmp) {
-                System.out.println("--- ИД заявки : " + item.getId() + " --- Имя завки:" + item.getName() + " --- Описание:" + item.getDesc());
+                System.out.println(item);
             }
         }
 

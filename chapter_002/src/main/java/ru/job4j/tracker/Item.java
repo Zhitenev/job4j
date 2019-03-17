@@ -58,6 +58,11 @@ public class Item {
     }
 
     @Override
+    public String toString() {
+        return "--- ИД заявки : " + this.getId() + " --- Имя завки:" + this.getName() + " --- Описание:" + this.getDesc();
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -75,5 +80,9 @@ public class Item {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, decs, time);
+    }
+
+    public String toString(Item item) {
+        return  "--- ИД заявки : " + item.getId() + " --- Имя завки:" + item.getName() + " --- Описание:" + item.getDesc();
     }
 }
