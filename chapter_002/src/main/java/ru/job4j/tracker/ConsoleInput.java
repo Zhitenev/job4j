@@ -13,11 +13,28 @@ public class ConsoleInput implements Input {
 
     /**
      * Реализация интерфейса Input и опрос пользователя.
-     * @param ask информация о запросе.
+     * @param question информация о запросе.
      * @return данные от пользователя
      */
-    public String ask(String ask) {
-        System.out.print(ask);
+    public String ask(String question) {
+        System.out.print(question);
         return sc.nextLine();
+    }
+
+    @Override
+    public int ask(String question, int[] range) {
+        int key = Integer.valueOf(this.ask(question));
+        boolean exist = false;
+        for (int value : range) {
+            if (value == key) {
+                exist = true;
+                break;
+            }
+        }
+        if (exist) {
+            return key;
+        } else {
+            throw new MenuOutException("Введите значение из меню.");
+        }
     }
 }

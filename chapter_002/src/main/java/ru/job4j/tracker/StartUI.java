@@ -1,4 +1,8 @@
 package ru.job4j.tracker;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *Реализация класса с основным модулем майн и иницализацией.
  *@author Oleg Zhieten
@@ -59,10 +63,18 @@ public class StartUI {
      */
     public void init() {
         MenuTracker menu = new MenuTracker(this.input, this.tracker);
+        List<Integer> range = new ArrayList<>();
         menu.fillActions();
+        for (int i = 0; i < menu.getActionsLentgh(); i++) {
+            range.add(i);
+        }
+        int[] rangeInt = new int[range.size()];
+        for (int j = 0; j < range.size(); j++) {
+            rangeInt[j] = range.get(j);
+        }
         do {
             menu.show();
-            menu.select(Integer.valueOf(input.ask("Выбирете:")));
+            menu.select(input.ask("Выбирете:", rangeInt));
         } while (!"y".equals(this.input.ask("Выход?(y): ")));
     }
 
@@ -71,7 +83,7 @@ public class StartUI {
      * @param args входные аргументы.
      */
     public static void main(String[] args) {
-        new StartUI(new ConsoleInput(), new Tracker()).init();
+        new StartUI(new ValidateInput(), new Tracker()).init();
     }
 
     public static class AddItem implements UserAction {
