@@ -30,16 +30,36 @@ public class ValidateInputTest {
         System.setOut(this.out);
     }
 
+    /**
+     * тест некоректных данных.
+     */
     @Test
     public void whenInvalidInput() {
         ValidateInput input = new ValidateInput(
                 new StubInput(new String[] {"invalid", "1"})
         );
-        input.ask("Выбирете:", new int[] {1});
+        input.ask("Выбирете:", new int[] {1, 2});
         assertThat(
                 this.mem.toString(),
                 is(
                         String.format("Введите коректные данные.%n")
+                )
+        );
+    }
+
+    /**
+     * Тест выхода за пределы массива.
+     */
+    @Test
+    public void whenOutBoundInput() {
+        ValidateInput input = new ValidateInput(
+                new StubInput(new String[] {"-1", "1"})
+        );
+        input.ask("Выбирете:", new int[] {1, 2});
+        assertThat(
+                this.mem.toString(),
+                is(
+                        String.format("Выбирите пункт из меню.%n")
                 )
         );
     }
