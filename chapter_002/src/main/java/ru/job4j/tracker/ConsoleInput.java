@@ -31,10 +31,9 @@ public class ConsoleInput implements Input {
                 break;
             }
         }
-        if (exist) {
-            return key;
-        } else {
+        if (!exist) {
             throw new MenuOutException("Введите значение из меню.");
         }
+        return key;
     }
 }

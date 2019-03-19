@@ -51,11 +51,9 @@ public class StubInput implements Input {
                 break;
             }
         }
-        if (exist) {
-            return chk;
-        } else {
+        if (!exist) {
             throw new MenuOutException("Введите значение из меню.");
         }
-
+        return chk;
     }
 }
