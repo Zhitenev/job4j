@@ -11,34 +11,6 @@ import java.util.List;
  */
 public class StartUI {
     /**
-     * Константа меню для добавления новой заявки.
-     */
-    private static final Integer ADD = 0;
-    /**
-     * Константа меню для отображения всех заявок.
-     */
-    private static final Integer SHOWALL = 1;
-    /**
-     * Константа меню для отображения всех заявок.
-     */
-    private static final Integer EDIT = 2;
-    /**
-     * Константа меню для удаления заявоки.
-     */
-    private static final Integer DELETE = 3;
-    /**
-     * Константа меню для поиска заявоки по ид.
-     */
-    private static final Integer FINDID = 4;
-    /**
-     * Константа меню для поиска заявоки по ид.
-     */
-    private static final Integer FINDNAME = 5;
-    /**
-     * Константа для выхода из цикла.
-     */
-    private static final Integer EXIT = 6;
-    /**
      * Получение данных от пользователя.
      */
     private final Input input;
@@ -91,10 +63,10 @@ public class StartUI {
         ).init();
     }
 
-    public static class AddItem implements UserAction {
-        @Override
-        public int key() {
-            return ADD;
+    public static class AddItem extends BaseAction {
+
+        public AddItem(int key, String name) {
+            super(key, name);
         }
 
         @Override
@@ -102,21 +74,14 @@ public class StartUI {
             System.out.println("------------ Добавление новой заявки --------------");
             String name = input.ask("Введите имя заявки :");
             String desc = input.ask("Введите описание заявки :");
-            Item item = new Item(name, desc);
-            tracker.add(item);
-            System.out.println("------------ Новая заявка с getId : " + item.getId() + "-----------");
-        }
-
-        @Override
-        public String info() {
-            return "0. Добавление новой заяки";
+            tracker.add(new Item(name, desc));
         }
     }
 
-    public static class ShowItem implements UserAction {
-        @Override
-        public int key() {
-            return SHOWALL;
+    public static class ShowItem extends BaseAction {
+
+        public ShowItem(int key, String name) {
+            super(key, name);
         }
 
         @Override
@@ -125,17 +90,12 @@ public class StartUI {
                 System.out.println(item);
             }
         }
-
-        @Override
-        public String info() {
-            return "1. Показать все заявки";
-        }
     }
 
-    public static class EditItem implements UserAction {
-        @Override
-        public int key() {
-            return EDIT;
+    public static class EditItem extends BaseAction {
+
+        public EditItem(int key, String name) {
+            super(key, name);
         }
 
         @Override
@@ -151,17 +111,12 @@ public class StartUI {
                 System.out.println("------------ Неверный ИД --------------");
             }
         }
-
-        @Override
-        public String info() {
-            return "2. Редактировать заявку";
-        }
     }
 
-    public static class DeleteItem implements UserAction {
-        @Override
-        public int key() {
-            return DELETE;
+    public static class DeleteItem extends BaseAction {
+
+        public DeleteItem(int key, String name) {
+            super(key, name);
         }
 
         @Override
@@ -175,17 +130,12 @@ public class StartUI {
                 System.out.println("------------ Неверный ИД --------------");
             }
         }
-
-        @Override
-        public String info() {
-            return "3. Удалить заявку";
-        }
     }
 
-    public static class FindIdItem implements UserAction {
-        @Override
-        public int key() {
-            return FINDID;
+    public static class FindIdItem extends BaseAction {
+
+        public FindIdItem(int key, String name) {
+            super(key, name);
         }
 
         @Override
@@ -200,17 +150,12 @@ public class StartUI {
                 System.out.println("------------ Неверный ИД --------------");
             }
         }
-
-        @Override
-        public String info() {
-            return "4. Найти заявку по ИД";
-        }
     }
 
-    public static class FindNameItem implements UserAction {
-        @Override
-        public int key() {
-            return FINDNAME;
+    public static class FindNameItem extends BaseAction {
+
+        public FindNameItem(int key, String name) {
+            super(key, name);
         }
 
         @Override
@@ -223,27 +168,17 @@ public class StartUI {
                 System.out.println(item);
             }
         }
-
-        @Override
-        public String info() {
-            return "5. Найти завки по имени";
-        }
     }
 
-    public static class ExitProgram implements UserAction {
-        @Override
-        public int key() {
-            return EXIT;
+    public static class ExitProgram extends BaseAction {
+
+        public ExitProgram(int key, String name) {
+            super(key, name);
         }
 
         @Override
         public void execute(Input input, Tracker tracker) {
 
-        }
-
-        @Override
-        public String info() {
-            return "6. Выход";
         }
     }
 }
