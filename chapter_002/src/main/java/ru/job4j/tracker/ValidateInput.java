@@ -24,12 +24,7 @@ public class ValidateInput implements Input {
         int value = -1;
         do {
             try {
-                value = Integer.valueOf(this.ask(question));
-                    if (0 < value && value < range.length) {
-                        invalid = false;
-                    } else {
-                        throw new MenuOutException("Выбирите пункт из меню.");
-                    }
+                value = input.ask(question, range);
                 invalid = false;
             } catch (MenuOutException moe) {
                 System.out.println("Выбирите пункт из меню.");

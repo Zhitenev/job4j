@@ -38,7 +38,7 @@ public class ValidateInputTest {
         ValidateInput input = new ValidateInput(
                 new StubInput(new String[] {"invalid", "1"})
         );
-        input.ask("Выбирете:", new int[] {1, 2});
+        input.ask("Выбирете:", new int[] {1});
         assertThat(
                 this.mem.toString(),
                 is(
@@ -55,7 +55,7 @@ public class ValidateInputTest {
         ValidateInput input = new ValidateInput(
                 new StubInput(new String[] {"-1", "1"})
         );
-        input.ask("Выбирете:", new int[] {1, 2});
+        input.ask("Выбирете:", new int[] {1});
         assertThat(
                 this.mem.toString(),
                 is(

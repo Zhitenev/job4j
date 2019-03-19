@@ -43,7 +43,19 @@ public class StubInput implements Input {
 
     @Override
     public int ask(String question, int[] range) {
+        int chk = Integer.valueOf(this.ask(question));
+        boolean exist = false;
+        for (int value : range) {
+            if (value == chk) {
+                exist = true;
+                break;
+            }
+        }
+        if (exist) {
+            return chk;
+        } else {
+            throw new MenuOutException("Введите значение из меню.");
+        }
 
-        return Integer.valueOf(this.value[this.position++]);
     }
 }
