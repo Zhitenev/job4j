@@ -17,4 +17,21 @@ public enum Cell {
         this.x = x;
         this.y = y;
     }
+    /**
+     * Получаем ячейку по координатам.
+     * @param x координата Х.
+     * @param y координата Y.
+     * @return возвращаем ячейку.
+     */
+    public static Cell getCell(int x, int y) {
+        Cell rst = null;
+        for (Cell value : Cell.values()) {
+            if (value.x == x && value.y == y) {
+                rst = value;
+                break;
+            }
+        }
+        return rst;
+    }
+
 }
