@@ -65,7 +65,7 @@ public class Chess extends Application {
                             rect.setX(((int) event.getX() / 40) * 40 + 5);
                             rect.setY(((int) event.getY() / 40) * 40 + 5);
 
-                    } catch (ImpossibleMoveException | OccupiedWayException | FigureNotFoundException e) {
+                    } catch (FigureNotFoundException | OccupiedWayException | ImpossibleMoveException e) {
                         rect.setX(((int) momento.getX() / 40) * 40 + 5);
                         rect.setY(((int) momento.getY() / 40) * 40 + 5);
                     }

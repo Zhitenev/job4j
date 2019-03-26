@@ -5,7 +5,7 @@ package ru.job4j.chess;
  *@since 2019
  *@version 2
  */
-public class ImpossibleMoveException extends Exception {
+public class ImpossibleMoveException extends RuntimeException {
     public ImpossibleMoveException() {
         super("Ход невозможен!");
     }

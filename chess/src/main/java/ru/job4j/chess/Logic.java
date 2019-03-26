@@ -22,25 +22,22 @@ public class Logic {
     public boolean move(Cell source, Cell dest) throws ImpossibleMoveException, OccupiedWayException, FigureNotFoundException {
         boolean rst = false;
         int index = this.findBy(source);
-        if (index != -1) {
-            Cell[] steps = this.figures[index].way(source, dest);
-
-            if (!isOccupied(steps)) {
-                throw new OccupiedWayException();
-            }
-            if (steps.length > 0 && steps[steps.length - 1].equals(dest)) {
-                rst = true;
-                this.figures[index] = this.figures[index].copy(dest);
-            }
-
-        } else {
+        if (index == -1) {
             throw new FigureNotFoundException();
         }
 
-        if (!rst) {
-            throw new ImpossibleMoveException();
+        Cell[] steps = this.figures[index].way(source, dest);
+        if (isOccupied(steps)) {
+            throw new OccupiedWayException();
         }
 
+
+        if (steps.length > 0 && steps[steps.length - 1].equals(dest)) {
+            this.figures[index] = this.figures[index].copy(dest);
+            rst = true;
+        } else {
+            throw new ImpossibleMoveException();
+        }
         return rst;
     }
 
@@ -52,10 +49,10 @@ public class Logic {
     }
 
     private boolean isOccupied(Cell[] steps) {
-        boolean result = true;
+        boolean result = false;
         for (Cell step : steps) {
             if (findBy(step) != -1) {
-                result = false;
+                result = true;
             }
         }
         return result;
