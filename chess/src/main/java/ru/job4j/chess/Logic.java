@@ -24,21 +24,23 @@ public class Logic {
         int index = this.findBy(source);
         if (index != -1) {
             Cell[] steps = this.figures[index].way(source, dest);
-            for (Cell step : steps) {
-                if (findBy(step) != -1) {
-                    throw new OccupiedWayException();
-                } else if (steps.length > 0 && steps[steps.length - 1].equals(dest)) {
-                    rst = true;
-                    this.figures[index] = this.figures[index].copy(dest);
-                }  else {
-                    throw new FigureNotFoundException();
-                }
+
+            if (!isOccupied(steps)) {
+                throw new OccupiedWayException();
             }
+            if (steps.length > 0 && steps[steps.length - 1].equals(dest)) {
+                rst = true;
+                this.figures[index] = this.figures[index].copy(dest);
+            }
+
+        } else {
+            throw new FigureNotFoundException();
         }
 
         if (!rst) {
             throw new ImpossibleMoveException();
         }
+
         return rst;
     }
 
@@ -47,6 +49,16 @@ public class Logic {
             this.figures[position] = null;
         }
         this.index = 0;
+    }
+
+    private boolean isOccupied(Cell[] steps) {
+        boolean result = true;
+        for (Cell step : steps) {
+            if (findBy(step) != -1) {
+                result = false;
+            }
+        }
+        return result;
     }
 
     private int findBy(Cell cell) {
