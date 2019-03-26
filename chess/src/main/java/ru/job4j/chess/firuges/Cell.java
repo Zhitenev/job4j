@@ -34,4 +34,16 @@ public enum Cell {
         return rst;
     }
 
+    /**
+     * Проверяем диагональ.
+     * @param source начальная позиция.
+     * @param dest конечная.
+     * @return результат проверки.
+     */
+    public static boolean isDiagonal(Cell source, Cell dest) {
+        int deltaX = (source.x == dest.x ? 0 : Math.abs(source.x - dest.x));
+        int deltaY = (source.y == dest.y ? 0 : Math.abs(source.y - dest.y));
+        return (deltaX == deltaY);
+    }
+
 }
