@@ -5,7 +5,7 @@ package ru.job4j.chess;
  *@since 2019
  *@version 2
  */
-public class FigureNotFoundException extends Exception {
+public class FigureNotFoundException extends RuntimeException {
     public FigureNotFoundException() {
         super("Фигура не найдена!");
     }

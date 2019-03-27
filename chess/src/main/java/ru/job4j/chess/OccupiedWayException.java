@@ -5,7 +5,7 @@ package ru.job4j.chess;
  *@since 2019
  *@version 2
  */
-public class OccupiedWayException extends Exception {
+public class OccupiedWayException extends RuntimeException {
     public OccupiedWayException() {
         super("Ход невозможен, путь занят!");
     }

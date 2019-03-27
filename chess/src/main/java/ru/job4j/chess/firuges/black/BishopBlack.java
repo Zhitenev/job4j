@@ -1,6 +1,5 @@
 package ru.job4j.chess.firuges.black;
 
-import com.sun.xml.internal.ws.handler.HandlerException;
 import ru.job4j.chess.ImpossibleMoveException;
 import ru.job4j.chess.firuges.Cell;
 import ru.job4j.chess.firuges.Figure;
