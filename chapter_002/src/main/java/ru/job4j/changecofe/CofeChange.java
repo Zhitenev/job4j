@@ -1,17 +1,27 @@
 package ru.job4j.changecofe;
-/**
+
+ /**
  *Выдача сдачи кофемашиной.
+ *@author Oleg Zhieten
+ *@since 2019
+ *@version 2
  */
 
 import java.util.Arrays;
 
 public class CofeChange {
+    /**
+     * Выдать сдачу минимальным количеством монет.
+     * @param value внесеная сумма.
+     * @param price стоимость товара.
+     * @return массив с оптимальным колличеством и номиналом монет.
+     */
     int[] changes(int value, int price) {
         int change = value - price;
         int[] result = new int[change];
         int j = 0;
         for (int i = 0; i < value; i++) {
-            if ((change - 10) >= 5) {
+            if ((change - 10) >= 0 || (change - 10) == 1) {
                 result[i] = 10;
                 change = change - 10;
                 j++;
@@ -30,12 +40,5 @@ public class CofeChange {
             }
         }
         return Arrays.copyOf(result, j);
-    }
-    public static void main(String[] args) {
-        CofeChange cofeChange = new CofeChange();
-        int[] out = cofeChange.changes(73, 35);
-        for (int tmp: out) {
-            System.out.println(tmp);
-        }
     }
 }
