@@ -10,12 +10,12 @@ public class CofeChange {
         int change = value - price;
         int[] result = new int[change];
         int j = 0;
-        for (int i = 0; i < price; i++) {
-            if ((change - 10) >= 6) {
+        for (int i = 0; i < value; i++) {
+            if ((change - 10) >= 5) {
                 result[i] = 10;
                 change = change - 10;
                 j++;
-            } else if ((change - 5) >= 3) {
+            } else if ((change - 5) >= 0) {
                 result[i] = 5;
                 change = change - 5;
                 j++;
