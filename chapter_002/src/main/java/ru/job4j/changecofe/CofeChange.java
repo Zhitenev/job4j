@@ -15,8 +15,8 @@ public class CofeChange {
      * @return массив с оптимальным колличеством и номиналом монет.
      */
 
-     int[] changes (int value, int price) {
-         int[] COINS = new int[] {10, 5, 2, 1};
+     int[] changes(int value, int price) {
+         final int[] COINS = new int[] {10, 5, 2, 1};
          int change = value - price;
          int[] result = new int[change];
          int i = 0;
