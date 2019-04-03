@@ -10,8 +10,6 @@ import java.util.LinkedList;
  */
 public class PriorityQueue {
     private LinkedList<Task> tasks = new LinkedList<>();
-    private Integer position = 0;
-    private Integer priority = 0;
 
     /**
      * Метод должен вставлять в нужную позицию элемент.
@@ -21,14 +19,12 @@ public class PriorityQueue {
      */
     public void put(Task task) {
         int index = 0;
-        if (position != 0 && task.getPriority() < tasks.get(position - 1).getPriority()) {
-            if (this.tasks.get(priority).getPriority() < task.getPriority()) {
-                index = priority++;
-            } else {
-                index = priority;
+        for (Task tmp : tasks) {
+            index++;
+            if (tmp.getPriority() > task.getPriority()) {
+                index--;
+                break;
             }
-        } else {
-            index = position++;
         }
         this.tasks.add(index, task);
     }
