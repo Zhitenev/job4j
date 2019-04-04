@@ -1,5 +1,6 @@
 package ru.job4j.tracker;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -13,7 +14,7 @@ public class Tracker {
     /**
      * Массив для хранение заявок.
      */
-    private final Item[] items = new Item[100];
+    private final ArrayList<Item> items = new ArrayList<>();
 
     /**
      * Указатель ячейки для новой заявки.
@@ -27,7 +28,7 @@ public class Tracker {
     public Item add(Item item) {
         item.setId(this.generateId());
         item.setTime(System.currentTimeMillis());
-        this.items[this.position++] = item;
+        this.items.add(this.position++, item);
         return item;
     }
 
@@ -39,12 +40,10 @@ public class Tracker {
     public boolean delete(String id) {
         boolean result = false;
         int i = 0;
-        Item[] tmp = new Item[100];
         for (Item item: this.items) {
             if (id != null && id.equals(item.getId())) {
-                System.arraycopy(this.items, i + 1, tmp, 0, position);
-                System.arraycopy(tmp, 0, this.items, i, position - 1);
-                this.items[--position] = null;
+                this.items.remove(i);
+                position--;
                 result = true;
                 break;
             }
@@ -63,10 +62,10 @@ public class Tracker {
         boolean result = false;
 
         for (int i = 0; i < position; i++) {
-            if (id != null && id.equals(this.items[i].getId())) {
-                item.setId(this.items[i].getId());
-                item.setTime(this.items[i].getTime());
-                this.items[i] = item;
+            if (id != null && id.equals(this.items.get(i).getId())) {
+                item.setId(this.items.get(i).getId());
+                item.setTime(this.items.get(i).getTime());
+                this.items.add(i, item);
                 result = true;
                 break;
             }
@@ -98,8 +97,8 @@ public class Tracker {
         Item[] res = new Item[position];
         int j = 0;
         for (int i = 0; i < position; i++) {
-            if (key != null && key.equals(this.items[i].getName())) {
-                res[j++] = this.items[i];
+            if (key != null && key.equals(this.items.get(i).getName())) {
+                res[j++] = this.items.get(i);
             }
         }
 
@@ -118,7 +117,12 @@ public class Tracker {
             }
             i++;
         }
-        return Arrays.copyOf(this.items, i);
+        int j = 0;
+        Item[] result = new Item[i];
+        for (Item tmp : items) {
+            result[j++] = tmp;
+        }
+        return result;
     }
     /**
      * Метод генерирует уникальный ключ для заявки.

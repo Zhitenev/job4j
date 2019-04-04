@@ -10,7 +10,7 @@ import java.util.List;
  */
 
 public class UserConvert {
-    public HashMap<Integer, User> process(List<User> list){
+    public HashMap<Integer, User> process(List<User> list) {
         HashMap<Integer, User> result = new HashMap<>();
             for (User tmp : list) {
                 result.put(tmp.getId(), tmp);
