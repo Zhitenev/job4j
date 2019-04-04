@@ -162,7 +162,7 @@ public class StartUI {
         public void execute(Input input, Tracker tracker) {
             System.out.println("------------ Поиск заявок по имени --------------");
             String name = input.ask("Введите имя заявки");
-            Item[] tmp = tracker.findByName(name);
+            List<Item> tmp = tracker.findByName(name);
             System.out.println("------------ Найденые заявки --------------");
             for (Item item : tmp) {
                 System.out.println(item);

@@ -56,7 +56,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();     // создаём Tracker
         Input input = new StubInput(new String[]{"0", "test name", "desc", "n", "6", "y"});
         new StartUI(input, tracker).init();
-        assertThat(tracker.findAll()[0].getName(), is("test name"));
+        assertThat(tracker.findAll().get(0).getName(), is("test name"));
     }
     /**
      * Проверяем редактирование заявки.
@@ -79,7 +79,7 @@ public class StartUITest {
         Item itemTwo = tracker.add(new Item("test name 2", "desc 2"));
         Input input = new StubInput(new String[]{"3", item.getId(), "n", "6", "y"});
         new StartUI(input, tracker).init();
-        assertThat(tracker.findAll()[0].getName(), is(itemTwo.getName()));
+        assertThat(tracker.findAll().get(0).getName(), is(itemTwo.getName()));
     }
     /**
      * Проверяем поиск заявки по ИД.

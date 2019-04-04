@@ -2,6 +2,7 @@ package ru.job4j.tracker;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -14,7 +15,7 @@ public class Tracker {
     /**
      * Массив для хранение заявок.
      */
-    private final ArrayList<Item> items = new ArrayList<>();
+    private final List<Item> items = new ArrayList<>();
 
     /**
      * Указатель ячейки для новой заявки.
@@ -93,36 +94,23 @@ public class Tracker {
      * @param key имя заявки.
      * @return элементы с искомым именем.
      */
-    public Item[] findByName(String key) {
-        Item[] res = new Item[position];
+    public List<Item> findByName(String key) {
+        List<Item> res = new ArrayList<>();
         int j = 0;
         for (int i = 0; i < position; i++) {
             if (key != null && key.equals(this.items.get(i).getName())) {
-                res[j++] = this.items.get(i);
+                res.add(j++, this.items.get(i));
             }
         }
-
-        return Arrays.copyOf(res, j);
+        return res;
     }
 
     /**
      * Возвращаем массив Итемов без пустых элементов.
      * @return Возвращаем не пустой массив.
      */
-    public Item[] findAll() {
-        int i = 0;
-        for (Item item: this.items) {
-            if (item == null) {
-                break;
-            }
-            i++;
-        }
-        int j = 0;
-        Item[] result = new Item[i];
-        for (Item tmp : items) {
-            result[j++] = tmp;
-        }
-        return result;
+    public List<Item> findAll() {
+        return this.items;
     }
     /**
      * Метод генерирует уникальный ключ для заявки.
