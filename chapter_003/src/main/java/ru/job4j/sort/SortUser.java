@@ -35,7 +35,7 @@ public class SortUser {
                       public int compare(User o1, User o2) {
                           int result = o1.getName().compareTo(o2.getName());
                           if (o1.getName().equals(o2.getName())) {
-                              result = o1.getAge().compareTo(o2.getAge());
+                              result = Integer.compare(o1.getAge(), o2.getAge());
                           }
                           return result;
                       }
