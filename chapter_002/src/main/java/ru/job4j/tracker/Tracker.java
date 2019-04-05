@@ -66,7 +66,7 @@ public class Tracker {
             if (id != null && id.equals(this.items.get(i).getId())) {
                 item.setId(this.items.get(i).getId());
                 item.setTime(this.items.get(i).getTime());
-                this.items.add(i, item);
+                this.items.set(i, item);
                 result = true;
                 break;
             }

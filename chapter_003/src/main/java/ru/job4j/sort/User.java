@@ -10,7 +10,7 @@ public class User implements Comparable<User> {
         this.name = name;
     }
 
-    public Integer getId() {
+    public Integer getAge() {
         return age;
     }
 
@@ -22,4 +22,5 @@ public class User implements Comparable<User> {
     public int compareTo(User u) {
         return this.age.compareTo(u.age);
     }
+
 }
