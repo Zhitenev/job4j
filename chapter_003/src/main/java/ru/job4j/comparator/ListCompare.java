@@ -3,8 +3,11 @@ package ru.job4j.comparator;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-
-
+/**
+ *Реализация класса Компаратор для строк.
+ *@since 2019
+ *@version 3
+ */
 public class ListCompare implements Comparator<String> {
     @Override
     public int compare(String left, String right) {
@@ -24,7 +27,7 @@ public class ListCompare implements Comparator<String> {
                     break;
                 }
             }
-            if (result == 0 && first.size() != second.size()){
+            if (result == 0 && first.size() != second.size()) {
                 result = -1;
             }
         return result;
