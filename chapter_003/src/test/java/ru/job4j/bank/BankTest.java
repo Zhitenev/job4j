@@ -129,4 +129,46 @@ public class BankTest {
         boolean result = bank.transferMoney("541", "10000001", "541", "10000002", 150);
         assertThat(result, is(true));
     }
+
+    /**
+     * проверяем успешную транзакцию.
+     */
+    @Test
+    public void whenDeleteAccount() {
+        Bank bank = new Bank();
+        User userOne = new User("Ilya", "541");
+        Account actOne = new Account(500, "10000001");
+        Account actTwo = new Account(100, "10000002");
+        Account actThree = new Account(200, "10000003");
+        bank.addUser(userOne);
+        bank.addAccountToUser("541", actOne);
+        bank.addAccountToUser("541", actTwo);
+        bank.addAccountToUser("541", actThree);
+        bank.deleteAccountFromUser("541", actTwo);
+        int result = bank.getUserAccounts("541").size();
+        assertThat(result, is(2));
+    }
+
+    /**
+     * проверяем успешную транзакцию.
+     */
+    @Test
+    public void whenDeleteAccountWhenTwoUsers() {
+        Bank bank = new Bank();
+        User userOne = new User("Ilya", "541");
+        User userTwo = new User("Oleg", "769");
+        Account actOne = new Account(500, "10000001");
+        Account actTwo = new Account(100, "10000002");
+        Account actThree = new Account(200, "10000003");
+        bank.addUser(userOne);
+        bank.addUser(userTwo);
+        bank.addAccountToUser("769", actOne);
+        bank.addAccountToUser("541", actOne);
+        bank.addAccountToUser("541", actTwo);
+        bank.addAccountToUser("541", actThree);
+        bank.deleteAccountFromUser("541", actTwo);
+        int result = bank.getUserAccounts("541").size();
+        assertThat(result, is(2));
+    }
+
 }

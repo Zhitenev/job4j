@@ -7,14 +7,13 @@ public class Bank {
      * Хранилище пользователей и их счетов.
      */
     private Map<User, List<Account>> bank = new HashMap<>();
-    private List<Account> accountList = new ArrayList<>();
 
     /**
      * Добавление пользователя без счета.
      * @param user пользователь.
      */
     public void addUser(User user) {
-        this.bank.putIfAbsent(user, accountList);
+        this.bank.putIfAbsent(user, new LinkedList<Account>());
     }
 
     /**
