@@ -36,11 +36,26 @@ public class BankTest {
     public void whenDeleteUser() {
         Bank bank = new Bank();
         User user = new User("Ilya", "541");
-        Account actOne = new Account(500, "10000001");
-        Account actTwo = new Account(100, "10000002");
+        bank.addUser(user);
         bank.deleteUser(user);
-        List<Account> result = bank.getUserAccounts("541");
-        assertThat(result.isEmpty(), is(true));
+        boolean result = bank.getUserAccounts("541").isEmpty();
+        assertThat(result, is(true));
+    }
+
+    /**
+     * Проверяем удаления пользователя.
+     */
+    @Test
+    public void whenDeleteUserFromTwo() {
+        Bank bank = new Bank();
+        User user = new User("Ilya", "541");
+        User userTwo = new User("Oleg", "769");
+        bank.addUser(user);
+        bank.addUser(userTwo);
+        bank.addAccountToUser("769", new Account(100, "10000002"));
+        bank.deleteUser(user);
+        boolean result = bank.getUserAccounts("769").isEmpty();
+        assertThat(result, is(false));
     }
 
     /**
@@ -89,11 +104,29 @@ public class BankTest {
         User userTwo = new User("Oleg", "769");
         Account actOne = new Account(500, "10000001");
         Account actTwo = new Account(100, "10000002");
+        Account actThree = new Account(200, "10000003");
         bank.addUser(userOne);
         bank.addUser(userTwo);
         bank.addAccountToUser("541", actOne);
         bank.addAccountToUser("769", actTwo);
+        bank.addAccountToUser("769", actThree);
         boolean result = bank.transferMoney("541", "10000001", "769", "10000003", 600);
         assertThat(result, is(false));
+    }
+
+    /**
+     * проверяем успешную транзакцию.
+     */
+    @Test
+    public void whenTransferMoneyTrueTwo() {
+        Bank bank = new Bank();
+        User userOne = new User("Ilya", "541");
+        Account actOne = new Account(500, "10000001");
+        Account actTwo = new Account(100, "10000002");
+        bank.addUser(userOne);
+        bank.addAccountToUser("541", actOne);
+        bank.addAccountToUser("541", actTwo);
+        boolean result = bank.transferMoney("541", "10000001", "541", "10000002", 150);
+        assertThat(result, is(true));
     }
 }

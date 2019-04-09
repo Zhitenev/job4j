@@ -7,13 +7,14 @@ public class Bank {
      * Хранилище пользователей и их счетов.
      */
     private Map<User, List<Account>> bank = new HashMap<>();
+    private List<Account> accountList = new ArrayList<>();
 
     /**
      * Добавление пользователя без счета.
      * @param user пользователь.
      */
     public void addUser(User user) {
-        this.bank.putIfAbsent(user, new ArrayList<>());
+        this.bank.putIfAbsent(user, accountList);
     }
 
     /**
@@ -32,9 +33,9 @@ public class Bank {
      * @param account аккаунт.
      */
     public void addAccountToUser(String passport, Account account) {
-        for (User tmp : bank.keySet()) {
-            if (tmp.getPassport().equals(passport)) {
-                this.bank.put(tmp, Arrays.asList(account));
+        for (User usr : this.bank.keySet()) {
+            if (usr.getPassport().equals(passport)) {
+                this.bank.get(usr).add(account);
             }
         }
     }
@@ -45,11 +46,7 @@ public class Bank {
      * @param account счет.
      */
     public void deleteAccountFromUser(String passport, Account account) {
-        for (User tmp : this.bank.keySet()) {
-            if (tmp.getPassport().equals(passport)) {
-                this.bank.get(tmp).remove(account);
-            }
-        }
+        this.bank.get(this.getUser(passport)).remove(account);
     }
 
     /**
@@ -59,12 +56,10 @@ public class Bank {
      */
     public List<Account> getUserAccounts(String passport) {
         List<Account> list = new ArrayList<>();
-        for (User tmp : bank.keySet()) {
-            if (tmp.getPassport().equals(passport)) {
-                list.addAll(this.bank.get(tmp));
-            }
+        if (this.getUser(passport) != null) {
+            list.addAll(this.bank.get(this.getUser(passport)));
         }
-        return  list;
+        return list;
     }
 
     /**
@@ -78,43 +73,53 @@ public class Bank {
      */
     public boolean transferMoney(String srcPassport, String srcRequisite, String destPassport, String dstRequisite, double amount) {
         boolean result = false;
-        User srcUser = null;
-        User destUser = null;
-        int srcIndex = 0;
-        int destIndex = 0;
-        //найдем пользователей по индетификатору.
-        for (User users : this.bank.keySet()) {
-            if (users.getPassport().equals(srcPassport)) {
-                srcUser = users;
-            }
-            if (users.getPassport().equals(destPassport)) {
-                destUser = users;
-            }
-        }
-        //если пользователи найдены.
+        Integer srcIndex = this.getIndex(this.getUserAccounts(srcPassport), srcRequisite);
+        Integer destIndex = this.getIndex(this.getUserAccounts(destPassport), dstRequisite);
+        User srcUser = this.getUser(srcPassport);
+        User destUser = this.getUser(destPassport);
+
         if (srcUser != null && destUser != null) {
-            //определим счет отправления.
-            for (Account act : this.bank.get(srcUser)) {
-                if (act.getRequisites().equals(srcRequisite)) {
-                    break;
-                }
-                srcIndex++;
+            if (this.bank.get(srcUser).get(srcIndex).getValue() - amount >= 0) {
+                this.bank.get(srcUser).get(srcIndex).setValue(
+                        this.bank.get(srcUser).get(srcIndex).getValue() - amount
+                );
+                this.bank.get(destUser).get(destIndex).setValue(
+                        this.bank.get(destUser).get(destIndex).getValue() + amount
+                );
+                result = true;
             }
-            //определим счет получателя.
-            for (Account act : this.bank.get(destUser)) {
-                if (act.getRequisites().equals(dstRequisite)) {
-                    break;
-                }
-                destIndex++;
+
+        }
+        return result;
+    }
+
+    /**
+     * Метод получения индекса счета для трансфера.
+     * @param accounts список реквизитов.
+     * @param requisite необходимые реквизиты.
+     * @return индетификатор счета в списке.
+     */
+    private Integer getIndex(List<Account> accounts, String requisite) {
+        Integer result = 0;
+        for (Account act : accounts) {
+            if (act.getRequisites().equals(requisite)) {
+                break;
             }
-            //если достаточно средств списываем и зачисляем на счет получателя.
-            if (this.bank.get(srcUser).get(srcIndex) != null && this.bank.get(srcUser).get(srcIndex).getValue() - amount > 0) {
-                //проверяем счет зачисления.
-                if (this.bank.get(srcUser).get(srcIndex) != null) {
-                    this.bank.get(srcUser).get(srcIndex).setValue(this.bank.get(srcUser).get(srcIndex).getValue() - amount);
-                    this.bank.get(destUser).get(destIndex).setValue(this.bank.get(destUser).get(destIndex).getValue() + amount);
-                    result = true;
-                }
+            result++;
+        }
+        return result;
+    }
+
+    /**
+     * Получения пользователя по паспорту.
+     * @param passport номер паспорта.
+     * @return найденый пользователь.
+     */
+    private User getUser(String passport) {
+        User result = null;
+        for (User tmp : this.bank.keySet()) {
+            if (tmp.getPassport().equals(passport)) {
+                result = tmp;
             }
         }
         return result;
