@@ -170,5 +170,16 @@ public class BankTest {
         int result = bank.getUserAccounts("541").size();
         assertThat(result, is(2));
     }
-
+    /**
+     * проверяем что счета нет.
+     */
+    @Test
+    public void whenDeleteAccountThenAccountIsEmpty() {
+        Bank bank = new Bank();
+        User userOne = new User("Ilya", "541");
+        bank.addUser(userOne);
+        bank.deleteAccountFromUser("541", null);
+        int result = bank.getUserAccounts("541").size();
+        assertThat(result, is(0));
+    }
 }

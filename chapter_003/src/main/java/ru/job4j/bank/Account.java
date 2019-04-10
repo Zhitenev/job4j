@@ -46,4 +46,20 @@ public class Account {
     public void setValue(double value) {
         this.value = value;
     }
+
+    /**
+     * Метод перевода средств.
+     * @param destReq конечный счет.
+     * @param amount сумма перевода.
+     * @return корректно или нет.
+     */
+    public boolean transfer (Account destReq, double amount) {
+        boolean result = false;
+        if (amount > 0 && amount < this.value && destReq != null) {
+            result = true;
+            this.value -= amount;
+            destReq.value += amount;
+        }
+        return result;
+    }
 }

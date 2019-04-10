@@ -45,7 +45,9 @@ public class Bank {
      * @param account счет.
      */
     public void deleteAccountFromUser(String passport, Account account) {
-        this.bank.get(this.getUser(passport)).remove(account);
+        if (this.bank.get(this.getUser(passport)).contains(account)) {
+            this.bank.get(this.getUser(passport)).remove(account);
+        }
     }
 
     /**
@@ -71,41 +73,27 @@ public class Bank {
      * @return результат операции.
      */
     public boolean transferMoney(String srcPassport, String srcRequisite, String destPassport, String dstRequisite, double amount) {
-        boolean result = false;
-        Integer srcIndex = this.getIndex(this.getUserAccounts(srcPassport), srcRequisite);
-        Integer destIndex = this.getIndex(this.getUserAccounts(destPassport), dstRequisite);
-        User srcUser = this.getUser(srcPassport);
-        User destUser = this.getUser(destPassport);
+        boolean result = this.bank.get(this.getUser(srcPassport)).contains(this.getAccount(srcPassport, srcRequisite)) &&
+                this.bank.get(this.getUser(destPassport)).contains(this.getAccount(destPassport, dstRequisite));
 
-        if (srcUser != null && destUser != null) {
-            if (this.bank.get(srcUser).get(srcIndex).getValue() - amount >= 0) {
-                this.bank.get(srcUser).get(srcIndex).setValue(
-                        this.bank.get(srcUser).get(srcIndex).getValue() - amount
-                );
-                this.bank.get(destUser).get(destIndex).setValue(
-                        this.bank.get(destUser).get(destIndex).getValue() + amount
-                );
-                result = true;
-            }
-
-        }
-        return result;
+        return result && this.getAccount(srcPassport, srcRequisite).transfer(this.getAccount(destPassport, dstRequisite), amount);
     }
 
     /**
      * Метод получения индекса счета для трансфера.
-     * @param accounts список реквизитов.
+     * @param passport индетификатор пользователя.
      * @param requisite необходимые реквизиты.
-     * @return индетификатор счета в списке.
+     * @return реквизиты.
      */
-    private Integer getIndex(List<Account> accounts, String requisite) {
-        Integer result = 0;
-        for (Account act : accounts) {
-            if (act.getRequisites().equals(requisite)) {
-                break;
+    private Account getAccount(String passport, String requisite) {
+            Account result = null;
+            for (Account tmp : this.getUserAccounts(passport)) {
+                if (tmp.getRequisites().equals(requisite)) {
+                    result = tmp;
+                    break;
+                }
             }
-            result++;
-        }
+
         return result;
     }
 
