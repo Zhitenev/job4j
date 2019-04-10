@@ -13,7 +13,7 @@ public class Bank {
      * @param user пользователь.
      */
     public void addUser(User user) {
-        this.bank.putIfAbsent(user, new LinkedList<Account>());
+        this.bank.putIfAbsent(user, new LinkedList<>());
     }
 
     /**
@@ -73,10 +73,9 @@ public class Bank {
      * @return результат операции.
      */
     public boolean transferMoney(String srcPassport, String srcRequisite, String destPassport, String dstRequisite, double amount) {
-        boolean result = this.bank.get(this.getUser(srcPassport)).contains(this.getAccount(srcPassport, srcRequisite))
-                && this.bank.get(this.getUser(destPassport)).contains(this.getAccount(destPassport, dstRequisite));
-
-        return result && this.getAccount(srcPassport, srcRequisite).transfer(this.getAccount(destPassport, dstRequisite), amount);
+        return this.bank.get(this.getUser(srcPassport)).contains(this.getAccount(srcPassport, srcRequisite))
+                && this.bank.get(this.getUser(destPassport)).contains(this.getAccount(destPassport, dstRequisite))
+                && this.getAccount(srcPassport, srcRequisite).transfer(this.getAccount(destPassport, dstRequisite), amount);
     }
 
     /**
@@ -86,13 +85,13 @@ public class Bank {
      * @return реквизиты.
      */
     private Account getAccount(String passport, String requisite) {
-            Account result = null;
-            for (Account tmp : this.getUserAccounts(passport)) {
-                if (tmp.getRequisites().equals(requisite)) {
-                    result = tmp;
-                    break;
-                }
+        Account result = null;
+        for (Account tmp : this.getUserAccounts(passport)) {
+            if (tmp.getRequisites().equals(requisite)) {
+                result = tmp;
+                break;
             }
+        }
 
         return result;
     }
