@@ -24,6 +24,14 @@ public class Account {
     }
 
     /**
+     * Геттер получаения значения счета.
+     * @return остаток на счете.
+     */
+    public double getValue() {
+        return value;
+    }
+
+    /**
      * Геттер получения реквизитов счета.
      * @return реквизиты счета.
      */

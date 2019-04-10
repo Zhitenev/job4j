@@ -45,8 +45,9 @@ public class Bank {
      * @param account счет.
      */
     public void deleteAccountFromUser(String passport, Account account) {
-        if (this.bank.get(this.getUser(passport)).contains(account)) {
-            this.bank.get(this.getUser(passport)).remove(account);
+        User user = this.getUser(passport);
+        if (user != null) {
+            this.bank.get(user).remove(account);
         }
     }
 
@@ -73,9 +74,10 @@ public class Bank {
      * @return результат операции.
      */
     public boolean transferMoney(String srcPassport, String srcRequisite, String destPassport, String dstRequisite, double amount) {
-        return this.bank.get(this.getUser(srcPassport)).contains(this.getAccount(srcPassport, srcRequisite))
-                && this.bank.get(this.getUser(destPassport)).contains(this.getAccount(destPassport, dstRequisite))
-                && this.getAccount(srcPassport, srcRequisite).transfer(this.getAccount(destPassport, dstRequisite), amount);
+        final Account srcAccount = this.getAccount(srcPassport, srcRequisite);
+        final Account dstAccount = this.getAccount(destPassport, dstRequisite);
+        return srcAccount != null && dstAccount != null
+                && srcAccount.transfer(dstAccount, amount);
     }
 
     /**
