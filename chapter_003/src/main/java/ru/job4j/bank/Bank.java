@@ -73,8 +73,8 @@ public class Bank {
      * @return результат операции.
      */
     public boolean transferMoney(String srcPassport, String srcRequisite, String destPassport, String dstRequisite, double amount) {
-        boolean result = this.bank.get(this.getUser(srcPassport)).contains(this.getAccount(srcPassport, srcRequisite)) &&
-                this.bank.get(this.getUser(destPassport)).contains(this.getAccount(destPassport, dstRequisite));
+        boolean result = this.bank.get(this.getUser(srcPassport)).contains(this.getAccount(srcPassport, srcRequisite))
+                && this.bank.get(this.getUser(destPassport)).contains(this.getAccount(destPassport, dstRequisite));
 
         return result && this.getAccount(srcPassport, srcRequisite).transfer(this.getAccount(destPassport, dstRequisite), amount);
     }
