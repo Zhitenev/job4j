@@ -19,6 +19,29 @@ public class DepartmentsTest {
     }
 
     @Test
+    public void whenMissedTwo() {
+        Departments deps = new Departments();
+        List<String> input = Arrays.asList("k1");
+        List<Departments.Org> expect = Arrays.asList(
+                new Departments.Org(Arrays.asList("k1"))
+        );
+        List<Departments.Org> result = deps.convert(input);
+        assertThat(result, is(expect));
+    }
+
+    @Test
+    public void whenMissedThree() {
+        Departments deps = new Departments();
+        List<String> input = Arrays.asList("k2/sk1");
+        List<Departments.Org> expect = Arrays.asList(
+                new Departments.Org(Arrays.asList("k2")),
+                new Departments.Org(Arrays.asList("k2", "sk1"))
+        );
+        List<Departments.Org> result = deps.convert(input);
+        assertThat(result, is(expect));
+    }
+
+    @Test
     public void whenAsc() {
         Departments deps = new Departments();
         List<String> input = Arrays.asList("k1/sk1", "k2");

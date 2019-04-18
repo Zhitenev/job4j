@@ -1,7 +1,5 @@
 package ru.job4j.departments;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class Departments {
     public static final class Org implements Comparable<Org> {
@@ -13,12 +11,25 @@ public class Departments {
 
         @Override
         public int compareTo(Org o) {
-            return this.compareTo(o);
+            return this.deps.toString().compareTo(o.deps.toString());
         }
 
         @Override
         public String toString() {
             return deps.toString();
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Org org = (Org) o;
+            return Objects.equals(deps, org.deps);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(deps);
         }
     }
 
