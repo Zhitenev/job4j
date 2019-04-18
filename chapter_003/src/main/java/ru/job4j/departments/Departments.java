@@ -11,7 +11,6 @@ public class Departments {
 
         @Override
         public int compareTo(Org o) {
-            System.out.println(this.deps.toString().compareTo(o.deps.toString()));
             return this.deps.toString().compareTo(o.deps.toString());
         }
 
