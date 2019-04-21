@@ -21,8 +21,12 @@ public class Departments {
 
         @Override
         public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
             Org org = (Org) o;
             return Objects.equals(deps, org.deps);
         }
@@ -42,7 +46,7 @@ public class Departments {
     public List<Org> convert(List<String> deps) {
         int j = 0;
         String sep = "/";
-        List<Org> result = new ArrayList<>();
+        List<Org> result = new ArrayList();
         for (String tmp : deps) {
             if (tmp.contains(sep)) {
                 String[] strAr = tmp.split(sep);
@@ -61,11 +65,20 @@ public class Departments {
         return result;
     }
 
+    /**
+     * Вернем отсортированный массив.
+     * @param orgs входящий массив.
+     * @return отсротированный массив.
+     */
     public List<Org> sortAsc(List<Org> orgs) {
         return orgs;
     }
 
-
+    /**
+     * Вернем реверсмассива.
+     * @param orgs массив.
+     * @return перевернутый массив.
+     */
     public List<Org> sortDesc(List<Org> orgs) {
         Collections.sort(orgs, Comparator.reverseOrder());
         return orgs;
