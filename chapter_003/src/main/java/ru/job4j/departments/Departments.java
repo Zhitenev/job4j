@@ -57,7 +57,6 @@ public class Departments {
             } else {
                 result.add(new Org(Arrays.asList(tmp)));
             }
-
         }
         return result;
     }
@@ -66,7 +65,9 @@ public class Departments {
         return orgs;
     }
 
+
     public List<Org> sortDesc(List<Org> orgs) {
+        Collections.sort(orgs, Comparator.reverseOrder());
         return orgs;
     }
 }
