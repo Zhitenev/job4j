@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
  *@version 3
  */
 public class PhoneDictionary {
-    private List<Person> persons = new ArrayList<Person>();
+    private List<Person> persons = new ArrayList<>();
 
     public void add(Person person) {
         this.persons.add(person);
@@ -23,17 +23,9 @@ public class PhoneDictionary {
      * @return Список подощедщих пользователей.
      */
     public List<Person> find(String key) {
-/**        List<Person> result = new ArrayList<>();
-            for (Person pers : this.persons) {
-                String str = pers.getAddress() + pers.getName() + pers.getPhone() + pers.getSurname();
-                if (str.contains(key)) {
-                    result.add(pers);
-                }
-            }
- **/
-        List<Person> result = this.persons.stream().filter(
-                pers -> (pers.getAddress() + pers.getName() + pers.getPhone() + pers.getSurname()).contains(key)
+
+        return this.persons.stream().filter(
+                person -> (person.getAddress() + person.getName() + person.getPhone() + person.getSurname()).contains(key)
         ).collect(Collectors.toList());
-        return result;
     }
 }
