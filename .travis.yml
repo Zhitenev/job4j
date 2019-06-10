@@ -18,3 +18,11 @@ notifications:
       -oleg@openres.ru
     on_success: never # default: change
     on_failure: always # default: always
+
+# JAVA
+jdk:
+  - oraclejdk8
+  - oraclejdk9
+  - oraclejdk11
+  - openjdk8
+  - openjdk-ea
