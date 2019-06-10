@@ -1,5 +1,6 @@
 package ru.job4j.departments;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Departments {
     public static final class Org implements Comparable<Org> {
@@ -80,7 +81,6 @@ public class Departments {
      * @return перевернутый массив.
      */
     public List<Org> sortDesc(List<Org> orgs) {
-        Collections.sort(orgs, Comparator.reverseOrder());
-        return orgs;
+        return orgs.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
     }
 }

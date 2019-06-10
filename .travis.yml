@@ -20,9 +20,15 @@ notifications:
     on_failure: always # default: always
 
 # JAVA
-jdk:
-  - oraclejdk8
-  - oraclejdk9
-  - oraclejdk11
-  - openjdk8
-  - openjdk-ea
+# Get latest install-jdk.sh script
+before_install:
+  - wget https://github.com/sormuras/bach/raw/master/install-jdk.sh
+
+matrix:
+  include:
+    # Java 11 "Oracle JDK"
+    - env: JDK='Oracle JDK 11'
+      install: . ./install-jdk.sh -F 11 -L BCL
+    # Java 11 "OpenJDK"
+    - env: JDK='OpenJDK 11'
+      install: . ./install-jdk.sh -F 11 -L GPL
