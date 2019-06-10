@@ -46,7 +46,7 @@ public class Departments {
     public List<Org> convert(List<String> deps) {
         int j = 0;
         String sep = "/";
-        List<Org> result = new ArrayList();
+        List<Org> result = new ArrayList<>();
         for (String tmp : deps) {
             if (tmp.contains(sep)) {
                 String[] strAr = tmp.split(sep);
