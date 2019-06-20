@@ -14,7 +14,7 @@ public class Convert {
      * @return карта студентов.
      */
     public Map<String, Student> convert(List<Student> students) {
-        return students.stream().distinct().collect(
+        return students.stream().collect(
                 Collectors.toMap(
                         student -> student.getSurName(),
                         student -> student
