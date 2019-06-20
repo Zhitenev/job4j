@@ -17,14 +17,10 @@ public class ProfilesTest {
      */
     @Test
     public void whenCollect2Address() {
-        Address addressOne = new Address("NSK", "Orange", 1, 2);
-        Address addressTwo = new Address("MSK", "Red", 2, 2);
-        Profile profileOne = new Profile(addressOne);
-        Profile profileTwo = new Profile(addressTwo);
-        List<Profile> profileList = new ArrayList<>();
-        profileList.add(profileOne);
-        profileList.add(profileTwo);
         Profiles profiles = new Profiles();
+        List<Profile> profileList = new ArrayList<>();
+        profileList.add(new Profile(new Address("NSK", "Orange", 1, 2)));
+        profileList.add(new Profile(new Address("MSK", "Red", 2, 2)));
         List<Address> result = profiles.collect(profileList);
         assertThat(result.size(), is(2));
     }
@@ -36,15 +32,9 @@ public class ProfilesTest {
     public void whenCollect3Address() {
         Profiles profiles = new Profiles();
         List<Profile> profileList = new ArrayList<>();
-        Address addressOne = new Address("NSK", "Orange", 1, 2);
-        Address addressTwo = new Address("MSK", "Red", 2, 2);
-        Address addressThree = new Address("SPB", "Brown", 3, 3);
-        Profile profileOne = new Profile(addressOne);
-        Profile profileTwo = new Profile(addressTwo);
-        Profile profileThree = new Profile(addressThree);
-        profileList.add(profileOne);
-        profileList.add(profileTwo);
-        profileList.add(profileThree);
+        profileList.add(new Profile(new Address("NSK", "Orange", 1, 2)));
+        profileList.add(new Profile(new Address("MSK", "Red", 2, 2)));
+        profileList.add(new Profile(new Address("SPB", "Brown", 3, 3)));
         List<Address> result = profiles.collect(profileList);
         assertThat(result.size(), is(3));
     }
