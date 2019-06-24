@@ -1,6 +1,7 @@
 package ru.job4j.bank;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Bank {
     /**
@@ -32,11 +33,10 @@ public class Bank {
      * @param account аккаунт.
      */
     public void addAccountToUser(String passport, Account account) {
-        for (User usr : this.bank.keySet()) {
-            if (usr.getPassport().equals(passport)) {
-                this.bank.get(usr).add(account);
-            }
-        }
+        this.bank.keySet().stream()
+                .filter(user -> user.getPassport().equals(passport))
+                .map(user -> this.bank.get(user).add(account))
+                .collect(Collectors.toList());
     }
 
     /**
@@ -87,15 +87,11 @@ public class Bank {
      * @return реквизиты.
      */
     private Account getAccount(String passport, String requisite) {
-        Account result = null;
-        for (Account tmp : this.getUserAccounts(passport)) {
-            if (tmp.getRequisites().equals(requisite)) {
-                result = tmp;
-                break;
-            }
-        }
+        return this.getUserAccounts(passport).stream()
+                .filter(acc -> acc.getRequisites().equals(requisite))
+                .findFirst()
+                .orElse(null);
 
-        return result;
     }
 
     /**
@@ -104,12 +100,9 @@ public class Bank {
      * @return найденый пользователь.
      */
     private User getUser(String passport) {
-        User result = null;
-        for (User tmp : this.bank.keySet()) {
-            if (tmp.getPassport().equals(passport)) {
-                result = tmp;
-            }
-        }
-        return result;
+        return this.bank.keySet().stream()
+                .filter(usr -> usr.getPassport().equals(passport))
+                .findFirst()
+                .orElse(null);
     }
 }
