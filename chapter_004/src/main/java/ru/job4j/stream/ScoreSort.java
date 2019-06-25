@@ -9,7 +9,7 @@ public class ScoreSort {
         return students.stream()
                 .sorted(new Student())
                 .flatMap(Stream::ofNullable)
-                .takeWhile(student -> student.getScore() > bound)
+                .dropWhile(student -> student.getScore() < bound)
                 .collect(Collectors.toList());
 
     }

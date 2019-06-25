@@ -29,10 +29,10 @@ public class ScoreSortTest {
         students.add(new Student(40));
         List<Student> result = ss.levelOf(students, 60);
         assertThat(result.size(), is(5));
-        assertThat(result.get(0).getScore(), is(98));
-        assertThat(result.get(1).getScore(), is(92));
+        assertThat(result.get(4).getScore(), is(98));
+        assertThat(result.get(3).getScore(), is(92));
         assertThat(result.get(2).getScore(), is(70));
-        assertThat(result.get(3).getScore(), is(69));
-        assertThat(result.get(4).getScore(), is(69));
+        assertThat(result.get(1).getScore(), is(69));
+        assertThat(result.get(0).getScore(), is(69));
     }
 }

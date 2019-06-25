@@ -73,7 +73,7 @@ public class Student implements Comparator<Student> {
         } else if (o2 == null) {
             result = 1;
         } else {
-            result = Integer.compare(o2.getScore(), o1.getScore());
+            result = Integer.compare(o1.getScore(), o2.getScore());
         }
         return result;
     }
