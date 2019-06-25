@@ -1,9 +1,13 @@
 package ru.job4j.stream;
 
+import java.util.Comparator;
+
 /**
  * Реализация студентов с общим балом.
  */
-public class Student {
+public class Student implements Comparator<Student> {
+
+
     /**
      * Общий бал студента.
      */
@@ -12,6 +16,10 @@ public class Student {
      * Фамилия студента.
      */
     private String surName;
+
+    public Student() {
+        this.score = 1;
+    }
 
     /**
      * Конструктор при создании студента задаем общий бал.
@@ -45,5 +53,28 @@ public class Student {
      */
     public String getSurName() {
         return surName;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
+    @Override
+    public int compare(Student o1, Student o2) {
+        int result;
+        if (o1 == null) {
+            result = -1;
+        } else if (o2 == null) {
+            result = 1;
+        } else {
+            result = Integer.compare(o2.getScore(), o1.getScore());
+        }
+        return result;
     }
 }
