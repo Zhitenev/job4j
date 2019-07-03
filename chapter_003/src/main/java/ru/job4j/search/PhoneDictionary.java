@@ -23,7 +23,6 @@ public class PhoneDictionary {
      * @return Список подощедщих пользователей.
      */
     public List<Person> find(String key) {
-
         return this.persons.stream().filter(
                 person -> (person.getAddress() + person.getName() + person.getPhone() + person.getSurname()).contains(key)
         ).collect(Collectors.toList());
