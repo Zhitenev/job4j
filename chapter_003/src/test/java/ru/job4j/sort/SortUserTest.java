@@ -9,23 +9,16 @@ public class SortUserTest {
     @Test
     public void whenSortSet() {
         SortUser sortLs = new SortUser();
-        User userOne = new User(18, "Alexey");
-        User userTwo = new User(20, "Ilya");
-        User userThree = new User(17, "Roman");
-        List<User> list = new ArrayList<>(
-                Arrays.asList(
-                        userOne,
-                        userTwo,
-                        userThree
-                )
+        List<User> list = List.of(
+                new User(18, "Alexey"),
+                new User(20, "Ilya"),
+                new User(17, "Roman")
         );
         Set<User> result = sortLs.sort(list);
-        Set<User> expect = new TreeSet<>(
-                Arrays.asList(
-                        userThree,
-                        userOne,
-                        userTwo
-                )
+        Set<User> expect = Set.of(
+                new User(17, "Roman"),
+                new User(20, "Ilya"),
+                new User(18, "Alexey")
         );
         assertThat(result, is(expect));
     }
@@ -33,23 +26,17 @@ public class SortUserTest {
     @Test
     public void whenElementsSortList() {
         SortUser sortLs = new SortUser();
-        User userOne = new User(18, "Alexey");
-        User userTwo = new User(20, "Ilya");
-        User userThree = new User(17, "Roman");
         List<User> list = new ArrayList<>(
-                Arrays.asList(
-                        userOne,
-                        userTwo,
-                        userThree
-                )
-        );
+                List.of(
+                        new User(18, "Alexey"),
+                        new User(20, "Ilya"),
+                        new User(17, "Roman")
+                ));
         List<User> result = sortLs.sortNameLength(list);
-        List<User> expect = new ArrayList<>(
-                Arrays.asList(
-                        userTwo,
-                        userThree,
-                        userOne
-                )
+        List<User> expect = List.of(
+                new User(20, "Ilya"),
+                new User(17, "Roman"),
+                new User(18, "Alexey")
         );
         assertThat(result, is(expect));
     }
@@ -57,25 +44,21 @@ public class SortUserTest {
     @Test
     public void whenElementsSorNameAndAge() {
         SortUser sortLs = new SortUser();
-        User userOne = new User(25, "Сергей");
-        User userTwo = new User(30, "Иван");
-        User userThree = new User(20, "Сергей");
-        User userFour = new User(25, "Иван");
         List<User> list = new ArrayList<>(
-                Arrays.asList(
-                        userOne,
-                        userTwo,
-                        userThree,
-                        userFour
+                List.of(
+                        new User(25, "Сергей"),
+                        new User(30, "Иван"),
+                        new User(20, "Сергей"),
+                        new User(25, "Иван")
                 )
         );
         List<User> result = sortLs.sortByAllFields(list);
         List<User> expect = new ArrayList<>(
-                Arrays.asList(
-                        userFour,
-                        userTwo,
-                        userThree,
-                        userOne
+                List.of(
+                        new User(25, "Иван"),
+                        new User(30, "Иван"),
+                        new User(20, "Сергей"),
+                        new User(25, "Сергей")
                 )
         );
         assertThat(result, is(expect));
