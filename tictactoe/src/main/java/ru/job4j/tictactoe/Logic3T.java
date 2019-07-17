@@ -1,4 +1,4 @@
-package job4j.tictactoe;
+package ru.job4j.tictactoe;
 
 import java.util.function.Predicate;
 
@@ -42,7 +42,7 @@ public class Logic3T {
      * @return однородны или нет.
      */
     public boolean isDiagonal(Predicate<Figure3T> predicate) {
-        return fillBy(predicate, 0,0, 1,1) || fillBy(predicate, 0,table.length - 1, 1,-1);
+        return fillBy(predicate, 0, 0, 1, 1) || fillBy(predicate, 0, table.length - 1, 1, -1);
     }
 
     /**
