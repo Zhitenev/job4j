@@ -39,17 +39,17 @@ public class IteratorEven implements Iterator {
      */
     @Override
     public Object next() {
-        try {
+        if (!hasNext()) {
+            throw new NoSuchElementException();
+        } else {
             for (int i = index; i < values.length + 1; i++) {
                 if (values[i] % 2 == 0) {
                     this.index = i;
                     break;
                 }
             }
-            return values[index++];
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new NoSuchElementException();
         }
+            return values[index++];
     }
 
     /**
