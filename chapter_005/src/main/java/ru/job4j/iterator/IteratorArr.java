@@ -25,7 +25,9 @@ public class IteratorArr implements Iterator {
     @Override
     public boolean hasNext() {
         boolean result;
-        if (nes == values.length - 1 & index == values[values.length - 1].length) {
+        if (this.values.length == 0) {
+            result = false;
+        } else if (nes == values.length - 1 & index == values[values.length - 1].length) {
             result = false;
         } else {
             result = values[nes].length >= index;
@@ -39,14 +41,12 @@ public class IteratorArr implements Iterator {
      */
     @Override
     public Object next() {
-        try {
-            if (!(values[nes].length > index)) {
-                this.nes++;
-                this.index = 0;
-            }
-            return values[nes][index++];
-        } catch (ArrayIndexOutOfBoundsException e) {
+        if (!hasNext()) {
             throw new NoSuchElementException();
+        } else if (!(values[nes].length > index)) {
+            this.nes++;
+            this.index = 0;
         }
+        return values[nes][index++];
     }
 }
