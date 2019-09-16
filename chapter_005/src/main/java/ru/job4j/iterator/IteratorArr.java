@@ -41,12 +41,13 @@ public class IteratorArr implements Iterator {
      */
     @Override
     public Object next() {
-        if (!hasNext()) {
-            throw new NoSuchElementException();
-        } else if (!(values[nes].length > index)) {
-            this.nes++;
-            this.index = 0;
+        if (hasNext()) {
+            if (!(values[nes].length > index)) {
+                this.nes++;
+                this.index = 0;
+            }
+            return values[nes][index++];
         }
-        return values[nes][index++];
+        throw new NoSuchElementException();
     }
 }
