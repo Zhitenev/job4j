@@ -81,14 +81,16 @@ public class SimpleArrayTest {
     public void whenIterableSimpleArrayHasNextTrue() {
         SimpleArray<Integer> simpleArray = new SimpleArray<>(5);
         var result = simpleArray.iterator().hasNext();
-        assertThat(result, is(true));
+        assertThat(result, is(false));
     }
 
     @Test
     public void whenIterableSimpleArrayHasNextFalse() {
-        SimpleArray<String> simpleArray = new SimpleArray<>(2);
+        SimpleArray<String> simpleArray = new SimpleArray<>(3);
         simpleArray.add("1");
         simpleArray.add("2");
+        simpleArray.iterator().next();
+        simpleArray.iterator().next();
         var result = simpleArray.iterator().hasNext();
         assertThat(result, is(false));
     }
@@ -97,20 +99,18 @@ public class SimpleArrayTest {
     public void whenIterableSimpleArrayNextWithString() {
         SimpleArray<String> simpleArray = new SimpleArray<>(3);
         simpleArray.add("1");
-        simpleArray.iterator().next();
-        simpleArray.add("2");
-        var result = simpleArray.get(2);
-        assertThat(result, is("2"));
+        var result = simpleArray.iterator().next();
+        assertThat(result, is("1"));
     }
 
     @Test
     public void whenIterableSimpleArrayNextWithInteger() {
         SimpleArray<Integer> simpleArray = new SimpleArray<>(3);
         simpleArray.add(10);
+        simpleArray.add(11);
         simpleArray.iterator().next();
-        simpleArray.add(12);
-        var result = simpleArray.get(2);
-        assertThat(result, is(12));
+        var result = simpleArray.iterator().next();
+        assertThat(result, is(11));
     }
 
     @Test(expected = NoSuchElementException.class)

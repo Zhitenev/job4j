@@ -11,6 +11,7 @@ import java.util.NoSuchElementException;
 public class SimpleArray<T> implements Iterable<T> {
     private Object[] objects;
     private int index = 0;
+    private Integer count = 0;
 
     /**
      * Конструктор создания массива заполненого неопередленным типом данных.
@@ -34,7 +35,9 @@ public class SimpleArray<T> implements Iterable<T> {
      * @param value новое значение.
      */
     void set(int index, T value) {
-        this.objects[index] = value;
+        if (index <= this.index) {
+            this.objects[index] = value;
+        }
     }
 
     /**
@@ -77,13 +80,7 @@ public class SimpleArray<T> implements Iterable<T> {
          */
         @Override
         public boolean hasNext() {
-            boolean result;
-            if (objects.length == 0) {
-                result = false;
-            } else {
-                result = objects.length > index;
-            }
-            return result;
+            return count < index;
         }
 
         /**
@@ -93,7 +90,7 @@ public class SimpleArray<T> implements Iterable<T> {
         @Override
         public T next() {
             if (hasNext()) {
-                return (T) objects[index++];
+                return (T) objects[count++];
             }
             throw new NoSuchElementException();
         }
