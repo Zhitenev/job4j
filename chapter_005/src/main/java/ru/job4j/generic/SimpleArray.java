@@ -10,8 +10,7 @@ import java.util.NoSuchElementException;
  */
 public class SimpleArray<T> implements Iterable<T> {
     private Object[] objects;
-    private int index = 0;
-    private Integer count = 0;
+    private int position = 0;
 
     /**
      * Конструктор создания массива заполненого неопередленным типом данных.
@@ -26,7 +25,7 @@ public class SimpleArray<T> implements Iterable<T> {
      * @param value добавляемый элемент.
      */
     void add(T value) {
-        this.objects[index++] = value;
+        this.objects[this.position++] = value;
     }
 
     /**
@@ -35,7 +34,7 @@ public class SimpleArray<T> implements Iterable<T> {
      * @param value новое значение.
      */
     void set(int index, T value) {
-        if (index <= this.index) {
+        if (index < this.position) {
             this.objects[index] = value;
         }
     }
@@ -54,11 +53,11 @@ public class SimpleArray<T> implements Iterable<T> {
      * @param index индекс удаляемого элемента.
      */
     void remove(int index) {
-        if (this.objects.length - 1 - index >= 0) {
+        if (index < this.position) {
             System.arraycopy(this.objects, index + 1, this.objects, index, this.objects.length - 1 - index);
         }
         this.objects[objects.length - 1] = null;
-        this.index--;
+        this.position--;
     }
 
     /**
@@ -74,13 +73,14 @@ public class SimpleArray<T> implements Iterable<T> {
      * Реализация итератора.
      */
     class SimpleArrayIterator implements Iterator<T> {
+        private int count = 0;
         /**
          * Переопределение метода hasNext.
          * @return возможно смещение или нет.
          */
         @Override
         public boolean hasNext() {
-            return count < index;
+            return count < position;
         }
 
         /**
@@ -90,7 +90,7 @@ public class SimpleArray<T> implements Iterable<T> {
         @Override
         public T next() {
             if (hasNext()) {
-                return (T) objects[count++];
+                return (T) objects[this.count++];
             }
             throw new NoSuchElementException();
         }

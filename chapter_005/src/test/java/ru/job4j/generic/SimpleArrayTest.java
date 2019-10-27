@@ -2,6 +2,7 @@ package ru.job4j.generic;
 
 import org.junit.Test;
 
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -87,11 +88,12 @@ public class SimpleArrayTest {
     @Test
     public void whenIterableSimpleArrayHasNextFalse() {
         SimpleArray<String> simpleArray = new SimpleArray<>(3);
+        Iterator iterator = simpleArray.iterator();
         simpleArray.add("1");
         simpleArray.add("2");
-        simpleArray.iterator().next();
-        simpleArray.iterator().next();
-        var result = simpleArray.iterator().hasNext();
+        iterator.next();
+        iterator.next();
+        var result = iterator.hasNext();
         assertThat(result, is(false));
     }
 
@@ -106,10 +108,11 @@ public class SimpleArrayTest {
     @Test
     public void whenIterableSimpleArrayNextWithInteger() {
         SimpleArray<Integer> simpleArray = new SimpleArray<>(3);
+        Iterator iterator = simpleArray.iterator();
         simpleArray.add(10);
         simpleArray.add(11);
-        simpleArray.iterator().next();
-        var result = simpleArray.iterator().next();
+        iterator.next();
+        var result = iterator.next();
         assertThat(result, is(11));
     }
 
