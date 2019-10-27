@@ -23,9 +23,10 @@ public class SimpleArrayList<E> {
      */
     public E delete() {
         Node<E> result = this.first;
-            this.first = result.next;
+        this.first.data = null;
+        this.first = result.next;
             size--;
-        return result.data;
+        return this.first.data;
     }
 
     /**
