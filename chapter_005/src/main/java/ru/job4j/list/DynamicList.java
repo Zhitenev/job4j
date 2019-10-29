@@ -7,13 +7,12 @@ import java.util.NoSuchElementException;
 
 public class DynamicList<T> implements Iterable<Object> {
     private static final int DEFAULT_CAPACITY = 10;
-    private static int modCount = 0;
     private Object[] objects = new Object[DEFAULT_CAPACITY];
-    private int index = 0;
+    private int position = 0;
 
     void add(T value) {
             this.getMoreSize();
-            this.objects[index++] = value;
+            this.objects[position++] = value;
     }
 
     T get(int index) {
@@ -21,13 +20,12 @@ public class DynamicList<T> implements Iterable<Object> {
     }
 
     Integer size() {
-        return this.index;
+        return this.position;
     }
 
     private void getMoreSize() {
-        if (objects.length >= index) {
-            this.objects = Arrays.copyOf(this.objects, this.index + DEFAULT_CAPACITY);
-            modCount++;
+        if (objects.length <= position) {
+            this.objects = Arrays.copyOf(this.objects, this.position + DEFAULT_CAPACITY);
         }
     }
 
@@ -48,16 +46,10 @@ public class DynamicList<T> implements Iterable<Object> {
          * Переопределение метода hasNext.
          * @return возможно смещение или нет.
          */
-        private int expectedModCount = modCount;
+        private int expectedModCount = 0;
         @Override
         public boolean hasNext() {
-            boolean result;
-            if (objects.length == 0) {
-                result = false;
-            } else {
-                result = objects.length > index;
-            }
-            return result;
+            return expectedModCount < position;
         }
 
         /**
@@ -67,10 +59,10 @@ public class DynamicList<T> implements Iterable<Object> {
         @Override
         public T next() {
             if (hasNext()) {
-                if (expectedModCount != modCount) {
+                if (expectedModCount >= position) {
                   throw new ConcurrentModificationException();
                 }
-                return (T) objects[index++];
+                return (T) objects[expectedModCount++];
             }
             throw new NoSuchElementException();
         }
