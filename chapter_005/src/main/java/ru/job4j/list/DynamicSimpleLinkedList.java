@@ -47,6 +47,13 @@ public class DynamicSimpleLinkedList<E> implements Iterable<Object> {
         return result.data;
     }
 
+    public void delete() {
+        Node<E> result = this.objects;
+        this.objects.data = null;
+        this.objects = result.next;
+        size--;
+    }
+
     @Override
     public Iterator<Object> iterator() {
         return new DynamicSimpleLinkedList.SimpleLinkedListIterator();
