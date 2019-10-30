@@ -9,28 +9,46 @@ public abstract class AbstractStore<E extends Base> implements Store<E> {
 
     @Override
     public boolean replace(String id, E value) {
-        baseStore.set(getId(id), value);
-        return true;
+        boolean result = false;
+        int pos = getId(id);
+        if (pos != -1) {
+            baseStore.set(pos, value);
+            result = true;
+        }
+        return result;
     }
 
     @Override
     public boolean delete(String id) {
-        baseStore.remove(getId(id));
-        return true;
+        boolean result = false;
+        int pos = getId(id);
+        if (pos != -1) {
+            baseStore.remove(pos);
+            result = true;
+        }
+        return result;
     }
 
     @Override
     public E findById(String id) {
-        return (E) baseStore.get(getId(id));
+        E result = null;
+        int pos = getId(id);
+        if (pos != -1) {
+            result = baseStore.get(pos);
+        }
+       return result;
     }
 
     private int getId(String id) {
         int pos = 0;
+        int chek = -1;
         for (E c : baseStore) {
             if (c.getId().equals(id)) {
-                pos++;
+                chek++;
+                break;
             }
+            pos++;
         }
-        return pos;
+        return chek == -1 ? -1 : pos;
     }
 }

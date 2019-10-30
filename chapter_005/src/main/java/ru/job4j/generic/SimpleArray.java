@@ -55,9 +55,9 @@ public class SimpleArray<T> implements Iterable<T> {
     void remove(int index) {
         if (index < this.position) {
             System.arraycopy(this.objects, index + 1, this.objects, index, this.objects.length - 1 - index);
+            this.objects[objects.length - 1] = null;
+            this.position--;
         }
-        this.objects[objects.length - 1] = null;
-        this.position--;
     }
 
     /**
