@@ -8,7 +8,7 @@ import static org.hamcrest.Matchers.is;
 public class UserStoreTest {
     @Test
     public void whenUseUserStore() {
-        UserStore<User> userStore = new UserStore<>();
+        UserStore userStore = new UserStore();
         User user = new User("1");
         User userTwo = new User("2");
         userStore.add(user);
@@ -19,7 +19,7 @@ public class UserStoreTest {
 
     @Test
     public void whenUseRoleStore() {
-        RoleStore<Role> roleStore = new RoleStore<>();
+        RoleStore roleStore = new RoleStore();
         Role role = new Role("1");
         Role roleTwo = new Role("2");
         roleStore.add(role);
@@ -30,7 +30,7 @@ public class UserStoreTest {
 
     @Test
     public void whenUseRoleStoreReplace() {
-        RoleStore<Role> roleStore = new RoleStore<>();
+        RoleStore roleStore = new RoleStore();
         Role role = new Role("1");
         Role roleTwo = new Role("2");
         Role roleThree = new Role("3");
@@ -44,7 +44,7 @@ public class UserStoreTest {
 
     @Test
     public void whenUseUserStoreReplace() {
-        UserStore<User> userStore = new UserStore<>();
+        UserStore userStore = new UserStore();
         User user = new User("1");
         User userTwo = new User("2");
         User userThree = new User("3");
@@ -59,7 +59,7 @@ public class UserStoreTest {
 
     @Test
     public void whenUseRoleStoreDelete() {
-        RoleStore<Role> roleStore = new RoleStore<>();
+        RoleStore roleStore = new RoleStore();
         Role role = new Role("1");
         Role roleTwo = new Role("2");
         Role roleThree = new Role("3");
@@ -73,7 +73,7 @@ public class UserStoreTest {
 
     @Test
     public void whenUseUserStoreDelete() {
-        UserStore<User> userStore = new UserStore<>();
+        UserStore userStore = new UserStore();
         User user = new User("1");
         User userTwo = new User("2");
         User userThree = new User("3");
@@ -87,7 +87,7 @@ public class UserStoreTest {
 
     @Test
     public void whenUseUserStoreAdd5() {
-        UserStore<User> userStore = new UserStore<>();
+        UserStore userStore = new UserStore();
         User user = new User("1");
         User userTwo = new User("2");
         User userThree = new User("3");
