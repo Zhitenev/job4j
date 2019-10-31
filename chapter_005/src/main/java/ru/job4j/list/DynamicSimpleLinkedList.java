@@ -12,17 +12,6 @@ public class DynamicSimpleLinkedList<E> implements Iterable<Object> {
     private int size;
     private Node<E> objects;
 
-    public DynamicSimpleLinkedList() {
-    }
-
-    public DynamicSimpleLinkedList(int size) {
-        this.size = size;
-    }
-
-    public DynamicSimpleLinkedList(Node<E> objects) {
-        this.objects = objects;
-    }
-
     /**
      * Добавить элемент.
      * @param data добавляемый элемент.
@@ -40,10 +29,10 @@ public class DynamicSimpleLinkedList<E> implements Iterable<Object> {
      * @return найденый элемент.
      */
     E get(int index) {
-            Node<E> result = this.objects;
-            for (int i = 0; i < index; i++) {
-                result = result.next;
-            }
+        Node<E> result = this.objects;
+        for (int i = 0; i < index; i++) {
+            result = result.next;
+        }
         return result.data;
     }
 
@@ -65,6 +54,8 @@ public class DynamicSimpleLinkedList<E> implements Iterable<Object> {
          * @return возможно смещение или нет.
          */
         private int expectedModCount = 0;
+        private Node<E> copyObj;
+
         @Override
         public boolean hasNext() {
             return expectedModCount < size;
@@ -77,11 +68,16 @@ public class DynamicSimpleLinkedList<E> implements Iterable<Object> {
         @Override
         public E next() {
             if (hasNext()) {
-                DynamicSimpleLinkedList<E> ds = new DynamicSimpleLinkedList<>(objects);
-                if (expectedModCount >= size) {
-                    throw new ConcurrentModificationException();
+                if (!(expectedModCount >= size)) {
+                    if (expectedModCount == 0) {
+                        copyObj = objects;
+                    } else {
+                        copyObj = copyObj.next;
+                    }
+                    expectedModCount++;
+                    return copyObj.data;
                 }
-                return ds.get(expectedModCount++);
+                throw new ConcurrentModificationException();
             }
             throw new NoSuchElementException();
         }

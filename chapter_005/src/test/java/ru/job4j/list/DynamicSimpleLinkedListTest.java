@@ -40,6 +40,7 @@ public class DynamicSimpleLinkedListTest {
         iterator.next();
         iterator.next();
         assertThat(iterator.next(), is(1));
+        assertThat(dsl.get(0), is(3));
     }
 
     @Test
