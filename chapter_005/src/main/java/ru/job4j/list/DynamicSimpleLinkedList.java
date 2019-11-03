@@ -9,9 +9,8 @@ import java.util.NoSuchElementException;
  * @param <E> Генерик.
  */
 public class DynamicSimpleLinkedList<E> implements Iterable<Object> {
-    private int size;
     private Node<E> objects;
-
+    private int modCount = 0;
     /**
      * Добавить элемент.
      * @param data добавляемый элемент.
@@ -20,7 +19,7 @@ public class DynamicSimpleLinkedList<E> implements Iterable<Object> {
         Node<E> newLink = new Node<>(data);
         newLink.next = this.objects;
         this.objects = newLink;
-        this.size++;
+        this.modCount++;
     }
 
     /**
@@ -40,7 +39,7 @@ public class DynamicSimpleLinkedList<E> implements Iterable<Object> {
         Node<E> result = this.objects;
         this.objects.data = null;
         this.objects = result.next;
-        size--;
+        modCount++;
     }
 
     @Override
@@ -53,12 +52,15 @@ public class DynamicSimpleLinkedList<E> implements Iterable<Object> {
          * Переопределение метода hasNext.
          * @return возможно смещение или нет.
          */
-        private int expectedModCount = 0;
-        private Node<E> copyObj;
+        private Node<E> copyObj = objects;
+        private int expectedModCount = modCount;
 
         @Override
         public boolean hasNext() {
-            return expectedModCount < size;
+            if (expectedModCount != modCount) {
+                throw new ConcurrentModificationException();
+            }
+            return copyObj != null;
         }
 
         /**
@@ -67,19 +69,12 @@ public class DynamicSimpleLinkedList<E> implements Iterable<Object> {
          */
         @Override
         public E next() {
-            if (hasNext()) {
-                if (!(expectedModCount >= size)) {
-                    if (expectedModCount == 0) {
-                        copyObj = objects;
-                    } else {
-                        copyObj = copyObj.next;
-                    }
-                    expectedModCount++;
-                    return copyObj.data;
-                }
-                throw new ConcurrentModificationException();
+            if (!hasNext()) {
+                throw new NoSuchElementException();
             }
-            throw new NoSuchElementException();
+            E result = copyObj.data;
+            copyObj = copyObj.next;
+            return result;
         }
     }
 

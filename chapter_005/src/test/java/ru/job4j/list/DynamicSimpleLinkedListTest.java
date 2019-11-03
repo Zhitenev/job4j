@@ -33,10 +33,10 @@ public class DynamicSimpleLinkedListTest {
     @Test
     public void whenAddInDynamicLinkedList3ElemAndUseIterator() {
         DynamicSimpleLinkedList<Integer> dsl = new DynamicSimpleLinkedList<>();
-        Iterator iterator = dsl.iterator();
         dsl.add(1);
         dsl.add(2);
         dsl.add(3);
+        Iterator iterator = dsl.iterator();
         iterator.next();
         iterator.next();
         assertThat(iterator.next(), is(1));
@@ -44,24 +44,12 @@ public class DynamicSimpleLinkedListTest {
     }
 
     @Test
-    public void whenAddInDynamicLinkedList3ElemAndUseIteratorHasNextTrue() {
-        DynamicSimpleLinkedList<Integer> dsl = new DynamicSimpleLinkedList<>();
-        Iterator iterator = dsl.iterator();
-        dsl.add(1);
-        dsl.add(2);
-        dsl.add(3);
-        iterator.next();
-        iterator.next();
-        assertThat(iterator.hasNext(), is(true));
-    }
-
-    @Test
     public void whenAddInDynamicLinkedList3ElemAndUseIteratorHasNextFalse() {
         DynamicSimpleLinkedList<Integer> dsl = new DynamicSimpleLinkedList<>();
-        Iterator iterator = dsl.iterator();
         dsl.add(1);
         dsl.add(2);
         dsl.add(3);
+        Iterator iterator = dsl.iterator();
         iterator.next();
         iterator.next();
         iterator.next();
