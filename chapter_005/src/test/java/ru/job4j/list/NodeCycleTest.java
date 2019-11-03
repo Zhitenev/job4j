@@ -27,7 +27,8 @@ public class NodeCycleTest {
         NodeCycle<Integer> four = new NodeCycle<>(4);
         first.next = two;
         two.next = third;
-        third.next = two;
+        third.next = four;
+        four.next = two;
         assertThat(first.hasCycle(first), is(true));
     }
 

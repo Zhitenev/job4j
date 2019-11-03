@@ -16,27 +16,20 @@ public class NodeCycle<E> {
      */
     boolean hasCycle(NodeCycle<E> first) {
         boolean result = false;
-        int pos = 0;
-        NodeCycle<E> before = first;
         NodeCycle<E> after = first.next;
-        for (int i = pos; i < size; i++) {
-            for (int j = i + 1; j <= size; j++) {
-                if (before.equals(after) & after != null) {
-                    result = true;
-                    break;
-                } else {
-                    if (after == null) {
-                        break;
-                    }
-                    after = after.next;
-                }
+        for (int i = 1; i <= size; i++) {
+            if (first.equals(after)) {
+                result = true;
+                break;
+            } else if (i == size) {
+                first = first.next;
+                i = 0;
             }
-            before = before.next;
-            if (before == null) {
+            after = after.next;
+
+            if (after == null) {
                 break;
             }
-            after = before.next;
-            pos++;
         }
         return result;
     }
