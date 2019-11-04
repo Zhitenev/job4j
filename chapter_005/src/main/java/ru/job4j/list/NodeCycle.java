@@ -17,21 +17,17 @@ public class NodeCycle<E> {
     boolean hasCycle(NodeCycle<E> first) {
         boolean result = false;
         NodeCycle<E> after = first.next;
-        for (int i = 1; i <= size; i++) {
-            if (first.equals(after)) {
-                result = true;
-                break;
-            } else if (i == size) {
+            for (int i = 1; i < size / 2; i++) {
+                if (first.equals(after)) {
+                    result = true;
+                    break;
+                }
+                if (after.next == null || after.next.next == null) {
+                    break;
+                }
                 first = first.next;
-                after = first.next.next;
-                i = 0;
+                after = after.next.next;
             }
-            after = after.next;
-
-            if (after == null) {
-                break;
-            }
-        }
         return result;
     }
 }
