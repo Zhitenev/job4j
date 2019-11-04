@@ -23,6 +23,7 @@ public class NodeCycle<E> {
                 break;
             } else if (i == size) {
                 first = first.next;
+                after = first.next.next;
                 i = 0;
             }
             after = after.next;
