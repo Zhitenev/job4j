@@ -4,6 +4,7 @@ import ru.job4j.list.DynamicSimpleLinkedList;
 
 public class SimpleSet<E> {
     private DynamicSimpleLinkedList<E> simpleSet;
+    private int count = 0;
 
     SimpleSet() {
         this.simpleSet = new DynamicSimpleLinkedList<>();
@@ -19,14 +20,11 @@ public class SimpleSet<E> {
         }
         if (check) {
             simpleSet.add(value);
+            count++;
         }
     }
 
     int size() {
-        int count = 0;
-        for (Object e : simpleSet) {
-            count++;
-        }
-        return count;
+        return this.count;
     }
 }
