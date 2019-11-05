@@ -21,6 +21,18 @@ public class NodeCycleTest {
     }
 
     @Test
+    public void whenHasCycle3True() {
+        NodeCycle<Integer> first = new NodeCycle<>(1);
+        NodeCycle<Integer> two = new NodeCycle<>(2);
+        NodeCycle<Integer> third = new NodeCycle<>(3);
+        NodeCycle<Integer> four = new NodeCycle<>(4);
+        first.next = two;
+        two.next = third;
+        third.next = first;
+        assertThat(first.hasCycle(first), is(true));
+    }
+
+    @Test
     public void whenHasCycleTrueInMid() {
         NodeCycle<Integer> first = new NodeCycle<>(1);
         NodeCycle<Integer> two = new NodeCycle<>(2);

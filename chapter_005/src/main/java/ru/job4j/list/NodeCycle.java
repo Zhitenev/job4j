@@ -17,7 +17,7 @@ public class NodeCycle<E> {
     boolean hasCycle(NodeCycle<E> first) {
         boolean result = false;
         NodeCycle<E> after = first.next;
-            for (int i = 1; i < size / 2; i++) {
+            for (int i = 1; i < size; i++) {
                 if (first.equals(after)) {
                     result = true;
                     break;
