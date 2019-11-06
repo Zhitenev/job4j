@@ -6,7 +6,7 @@ public class MapUser extends User {
     }
 
     @Override
-    public int hashCode() {
-        return super.hashCode();
+    public boolean equals(Object o) {
+        return super.equals(o);
     }
 }
