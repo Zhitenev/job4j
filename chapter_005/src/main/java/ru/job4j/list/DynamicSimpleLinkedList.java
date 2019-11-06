@@ -27,7 +27,7 @@ public class DynamicSimpleLinkedList<E> implements Iterable<Object> {
      * @param index индекс получаемого элемента.
      * @return найденый элемент.
      */
-    E get(int index) {
+    public E get(int index) {
         Node<E> result = this.objects;
         for (int i = 0; i < index; i++) {
             result = result.next;

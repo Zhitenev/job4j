@@ -2,6 +2,8 @@ package ru.job4j.set;
 
 import org.junit.Test;
 
+import java.util.Iterator;
+
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -47,5 +49,29 @@ public class SimpleSetTest {
         simpleSet.add(4);
         simpleSet.add(4);
         assertThat(simpleSet.size(), is(4));
+    }
+
+    @Test
+    public void whenAddIntegerInSimpleSet5ElemAndUseIterator() {
+        SimpleSet<Integer> simpleSet = new SimpleSet<>();
+        simpleSet.add(1);
+        simpleSet.add(2);
+        simpleSet.add(3);
+        simpleSet.add(4);
+        simpleSet.add(4);
+        Iterator iterator = simpleSet.iterator();
+        assertThat(iterator.next(), is(1));
+    }
+
+
+    @Test
+    public void whenAddIntegerInSimpleSet5ElemAndUseIteratorHasNext() {
+        SimpleSet<Integer> simpleSet = new SimpleSet<>();
+        simpleSet.add(1);
+        simpleSet.add(2);
+        Iterator iterator = simpleSet.iterator();
+        iterator.next();
+        iterator.next();
+        assertThat(iterator.hasNext(), is(false));
     }
 }
