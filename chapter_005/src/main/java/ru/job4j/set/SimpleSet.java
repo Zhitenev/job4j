@@ -8,17 +8,15 @@ import java.util.NoSuchElementException;
 
 public class SimpleSet<E> implements Iterable<Object> {
     private DynamicSimpleLinkedList<E> simpleSet = new DynamicSimpleLinkedList<>();
-    private int count = 0;
 
     public void add(E value) {
         if (contains(value)) {
             simpleSet.add(value);
-            count++;
         }
     }
 
     public int size() {
-        return this.count;
+        return this.simpleSet.size();
     }
 
     private boolean contains(E value) {
@@ -39,15 +37,15 @@ public class SimpleSet<E> implements Iterable<Object> {
 
     class SimpleSetIterator implements Iterator<E> {
         private DynamicSimpleLinkedList copyObj = simpleSet;
-        private int expectedModCount = count;
+        private int expectedModCount = simpleSet.size();
         private int position = 1;
 
         @Override
         public boolean hasNext() {
-            if (expectedModCount != count) {
+            if (expectedModCount != simpleSet.size()) {
                 throw new ConcurrentModificationException();
             }
-            return position <= count;
+            return position <= simpleSet.size();
         }
 
         @Override
@@ -55,7 +53,7 @@ public class SimpleSet<E> implements Iterable<Object> {
             if (!hasNext()) {
                 throw new NoSuchElementException();
             }
-            return (E) copyObj.get(count - position++);
+            return (E) copyObj.get(simpleSet.size() - position++);
         }
     }
 }

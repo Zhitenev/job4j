@@ -35,6 +35,10 @@ public class DynamicSimpleLinkedList<E> implements Iterable<Object> {
         return result.data;
     }
 
+    public int size() {
+        return this.modCount;
+    }
+
     public void delete() {
         Node<E> result = this.objects;
         this.objects.data = null;
