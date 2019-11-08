@@ -60,7 +60,7 @@ public class SimpleSetTest {
         simpleSet.add(4);
         simpleSet.add(4);
         Iterator iterator = simpleSet.iterator();
-        assertThat(iterator.next(), is(1));
+        assertThat(iterator.next(), is(4));
     }
 
 
