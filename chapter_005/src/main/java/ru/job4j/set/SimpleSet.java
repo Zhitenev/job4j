@@ -8,7 +8,7 @@ public class SimpleSet<E> implements Iterable<Object> {
     private DynamicSimpleLinkedList<E> simpleSet = new DynamicSimpleLinkedList<>();
 
     public void add(E value) {
-        if (contains(value)) {
+        if (!contains(value)) {
             simpleSet.add(value);
         }
     }
@@ -18,10 +18,10 @@ public class SimpleSet<E> implements Iterable<Object> {
     }
 
     private boolean contains(E value) {
-        boolean check = true;
+        boolean check = false;
         for (Object e : simpleSet) {
             if (e.equals(value)) {
-                check = false;
+                check = true;
                 break;
             }
         }
