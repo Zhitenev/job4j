@@ -10,14 +10,12 @@ public class SimpleHashMap<K, V> implements Iterable<V> {
     private Object[] objects = new Object[DEFAULT_CAPACITY];
     private int position = 0;
 
-
-
     boolean insert(K key, V value) {
         canInsert();
         int id = hash(key);
         objects[id] = value;
         position++;
-        return objects[id] == null;
+        return objects[id] != null;
     }
 
     boolean delete(K key) {
@@ -49,18 +47,32 @@ public class SimpleHashMap<K, V> implements Iterable<V> {
 
     class SimpleHashMapIterator implements Iterator<Object> {
         private int expectedModCount = 0;
+        private int nextPosition = 0;
         @Override
         public boolean hasNext() {
             return expectedModCount < position;
         }
 
+        /**
+         * Переопределяем метод некст порядок не гарантирован.
+         * @return следующий объект.
+         */
         @Override
         public V next() {
+            Object result = null;
             if (hasNext()) {
                 if (expectedModCount >= position) {
                     throw new ConcurrentModificationException();
                 }
-                return (V) objects[expectedModCount++];
+                for (int i = nextPosition; i < objects.length; i++) {
+                    if (objects[i] != null) {
+                        result = objects[i];
+                        nextPosition = i + 1;
+                        expectedModCount++;
+                        break;
+                    }
+                }
+                return (V) result;
             }
             throw new NoSuchElementException();
         }
