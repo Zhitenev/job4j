@@ -61,18 +61,18 @@ public class SimpleHashMap<K, V> implements Iterable<V> {
         public V next() {
             Object result = null;
             if (hasNext()) {
-                if (expectedModCount >= position) {
-                    throw new ConcurrentModificationException();
-                }
-                for (int i = nextPosition; i < objects.length; i++) {
-                    if (objects[i] != null) {
-                        result = objects[i];
-                        nextPosition = i + 1;
-                        expectedModCount++;
-                        break;
+                if (expectedModCount < position) {
+                    for (int i = nextPosition; i < objects.length; i++) {
+                        if (objects[i] != null) {
+                            result = objects[i];
+                            nextPosition = i + 1;
+                            expectedModCount++;
+                            break;
+                        }
                     }
+                    return (V) result;
                 }
-                return (V) result;
+                throw new ConcurrentModificationException();
             }
             throw new NoSuchElementException();
         }
