@@ -66,13 +66,18 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
 
         @Override
         public E next() {
-            if (hasNext()) {
-                if (expectedModCount <= modCount) {
-                    return data.element().getValue();
-                }
+            Node<E> result;
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            if (expectedModCount != modCount) {
                 throw new ConcurrentModificationException();
             }
-            throw new NoSuchElementException();
+            result = data.poll();
+                for (Node<E> child : result.leaves()) {
+                    data.offer(child);
+                }
+            return result.getValue();
         }
     }
 }
