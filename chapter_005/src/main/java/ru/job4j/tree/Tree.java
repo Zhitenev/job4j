@@ -45,19 +45,19 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
     }
 
     public boolean isBinary() {
-        int count = 0;
         boolean result = true;
         Queue<Node<E>> data = new LinkedList<>();
         data.offer(root);
         while (!data.isEmpty()) {
             Node<E> element = data.poll();
+            int count = 0;
             for (Node<E> child : element.leaves()) {
                 data.offer(child);
                 count++;
-                if (count > 2) {
-                    result = false;
-                    break;
-                }
+            }
+            if (count > 2) {
+                result = false;
+                break;
             }
         }
         return result;
