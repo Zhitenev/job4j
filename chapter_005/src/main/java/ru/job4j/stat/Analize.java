@@ -1,20 +1,24 @@
 package ru.job4j.stat;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 /**
  * Класс Analize для проверки изменения в колекции.
  */
 public class Analize {
     public Info diff(List<User> previous, List<User> current) {
         Info info = new Info();
+        Set<User> prev = new HashSet<>(previous);
         int eqId = 0;
-        for (int i = 0; i < previous.size(); i++) {
-            for (int j = 0; j < current.size(); j++) {
-                if (previous.get(i).id == current.get(j).id
-                        && !previous.get(i).name.equals(current.get(j).name)) {
+        for (User usrPrev: prev) {
+            for (User usrCur : current) {
+                if (usrPrev.id == usrCur.id
+                        && !usrPrev.name.equals(usrCur.name)) {
                     info.change();
                 }
-                if (previous.get(i).id == current.get(j).id) {
+                if (usrPrev.id == usrCur.id) {
                     eqId++;
                 }
             }
