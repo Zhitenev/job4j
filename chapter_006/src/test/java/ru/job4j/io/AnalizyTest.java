@@ -13,7 +13,7 @@ public class AnalizyTest {
     public void whenAnalizyWithTwoDownTimeFirstLine() {
         Analizy analizy = new Analizy();
         String path = "./data/";
-        analizy.unavailable(path + "server.log", path + "unavailable.csv");
+        analizy.unavailable(path + "server.lgs", path + "unavailable.csv");
         List<String> check = analizy.load(path + "unavailable.csv");
         assertThat(
                 check.get(0),
@@ -25,7 +25,7 @@ public class AnalizyTest {
     public void whenAnalizyWithTwoDownTimeSecondLine() {
         Analizy analizy = new Analizy();
         String path = "./data/";
-        analizy.unavailable(path + "server.log", path + "unavailable.csv");
+        analizy.unavailable(path + "server.lgs", path + "unavailable.csv");
         List<String> check = analizy.load(path + "unavailable.csv");
         assertThat(
                 check.get(1),
