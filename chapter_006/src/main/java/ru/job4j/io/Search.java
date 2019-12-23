@@ -24,7 +24,7 @@ public class Search {
                 files(f.getAbsolutePath(), exts);
             } else {
                 for (String ext : exts) {
-                    if (ext == null || f.getName().contains(ext)) {
+                    if (ext == null || f.getName().endsWith(ext)) {
                         result.add(f);
                     }
                 }
