@@ -17,6 +17,25 @@ public class SearchTest {
     public TemporaryFolder folder = new TemporaryFolder();
 
     @Test
+    public void whenTestInListWithOutTxt() throws IOException {
+        folder.newFile("myfile.csv");
+        folder.newFile("myfile.txt");
+        folder.newFolder("subfolder");
+        folder.newFile("subfolder/myfile2.txt");
+        folder.newFolder("subfolder", "subSubfolder");
+        folder.newFile("subfolder/subSubfolder/myfile.java");
+        Search search = new Search();
+        List<String> ext = new ArrayList<>();
+        ext.add(".csv");
+        ext.add(".java");
+        List<File> files = new ArrayList<>(search.files(folder.getRoot().getPath(), ext));
+        assertThat(
+                files.get(0).getName(),
+                is("myfile.csv")
+        );
+    }
+
+    @Test
     public void whenTestInListTxt() throws IOException {
         folder.newFile("myfile.txt");
         folder.newFolder("subfolder");
@@ -44,6 +63,24 @@ public class SearchTest {
         Search search = new Search();
         List<String> ext = new ArrayList<>();
         ext.add(".txt");
+        ext.add(".java");
+        List<File> files = new ArrayList<>(search.files(folder.getRoot().getPath(), ext));
+        assertThat(
+                files.get(2).getName(),
+                is("myfile.java")
+        );
+    }
+
+    @Test
+    public void whenTestInLisOnlyOne() throws IOException {
+        folder.newFile("myfile.csv");
+        folder.newFile("myfile.txt");
+        folder.newFolder("subfolder");
+        folder.newFile("subfolder/myfile2.txt");
+        folder.newFolder("subfolder", "subSubfolder");
+        folder.newFile("subfolder/subSubfolder/myfile.java");
+        Search search = new Search();
+        List<String> ext = new ArrayList<>();
         ext.add(".java");
         List<File> files = new ArrayList<>(search.files(folder.getRoot().getPath(), ext));
         assertThat(

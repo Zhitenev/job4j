@@ -2,10 +2,12 @@ package ru.job4j.io;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class Search {
-    private static List<File> result = new ArrayList<>();
+    private  List<File> result = new ArrayList<>();
     List<File> files(String parent, List<String> exts) {
 
         File file = new File(parent);
@@ -19,14 +21,19 @@ public class Search {
                             + ": Not a directory");
         }
 
-        for (File f : list) {
-            if (f.isDirectory()) {
-                files(f.getAbsolutePath(), exts);
-            } else {
-                for (String ext : exts) {
-                    if (ext == null || f.getName().endsWith(ext)) {
-                        result.add(f);
+        Queue<File> data = new LinkedList<>();
+        data.offer(file);
+        while (!data.isEmpty()) {
+            File elem = data.poll();
+            if (elem.isDirectory()) {
+                for (File fl : elem.listFiles()) {
+                    for (String ext : exts) {
+                        if (!fl.isDirectory()
+                                && ext == null || fl.getName().endsWith(ext)) {
+                            result.add(fl);
+                        }
                     }
+                    data.offer(fl);
                 }
             }
         }
