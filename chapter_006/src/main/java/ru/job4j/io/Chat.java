@@ -21,7 +21,7 @@ public class Chat {
         String answer = "";
         System.out.println("Stat chatting");
         List<String> listWords = chat.loadWord();
-        try (PrintWriter out = new PrintWriter(new FileOutputStream("/Users/ozh/Documents/job4j/chapter_006/data/chatLog.txt"))) {
+        try (PrintWriter out = new PrintWriter(new FileOutputStream("./chapter_006/data/chatLog.txt"))) {
         do {
             int getPosition = random.nextInt(listWords.size());
             answer = chat.ask();
@@ -49,7 +49,7 @@ public class Chat {
      */
     private List<String> loadWord() {
         List<String> result = new ArrayList<>();
-        try (BufferedReader read = new BufferedReader(new FileReader("/Users/ozh/Documents/job4j/chapter_006/data/list.txt"))) {
+        try (BufferedReader read = new BufferedReader(new FileReader("./chapter_006/data/list.txt"))) {
             String line;
             while ((line = read.readLine()) != null) {
                     result.add(line);

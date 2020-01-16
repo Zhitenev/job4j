@@ -1,9 +1,14 @@
-1
-dog
-2
-next
-3
-cat
-pfdthibnm
-dog
+hi
+drop
+mo
+air
+lo
+hello
+стоп
+молчишь?
+продожить
+продолжить
+drop
+ну вот
+hello
 завершить

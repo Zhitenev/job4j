@@ -61,22 +61,22 @@ public class Zip {
 }
 
 class Args {
-    private String[] args = new String[10];
+    private String[] args;
 
-    public Args(String[] arg) {
+     Args(String[] arg) {
         this.args = arg;
 
     }
 
-    public String directory() {
+     String directory() {
         return this.args[1];
     }
 
-    public String exclude() {
+     String exclude() {
         return this.args[3];
     }
 
-    public String output() {
+     String output() {
         return this.args[5];
     }
 }
