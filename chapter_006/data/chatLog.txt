@@ -1,14 +1,11 @@
-hi
-drop
-mo
-air
-lo
-hello
+Hi!
+next
+What next?
+cat
 стоп
-молчишь?
-продожить
+тишина)
 продолжить
-drop
-ну вот
-hello
+sun
+ну вот опять
+next
 завершить

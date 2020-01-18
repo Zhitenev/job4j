@@ -13,34 +13,17 @@ import java.util.Scanner;
  * Реализация чат бота с командами.
  */
 public class Chat {
+    private String stopWord = "";
+    private static final String STOP = "стоп";
+    private static final String CONT = "продолжить";
+    private static final String EXIT = "завершить";
+    private static final String LOG_PATH = "./chapter_006/data/chatLog.txt";
+    private static final String WORDS_BASE_PATH = "./chapter_006/data/list.txt";
     private Scanner sc = new Scanner(System.in);
-    private static String stopWord = "продолжить";
-    private static Random random = new Random();
+    private Random random = new Random();
+
     public static void main(String[] args) {
-        Chat chat = new Chat();
-        String answer = "";
-        System.out.println("Stat chatting");
-        List<String> listWords = chat.loadWord();
-        try (PrintWriter out = new PrintWriter(new FileOutputStream("./chapter_006/data/chatLog.txt"))) {
-        do {
-            int getPosition = random.nextInt(listWords.size());
-            answer = chat.ask();
-            out.println(answer);
-            if (!answer.equals("стоп") && !stopWord.equals("стоп") && !answer.equals("завершить")) {
-                chat.typing(listWords.get(getPosition));
-                out.println(listWords.get(getPosition));
-            } else {
-                stopWord = "стоп";
-            }
-            if (answer.equals("продолжить")) {
-                stopWord = "продолжить";
-                chat.typing(listWords.get(getPosition));
-                out.println(listWords.get(getPosition));
-            }
-        } while (!answer.equals("завершить"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        new Chat().init();
     }
 
     /**
@@ -49,10 +32,10 @@ public class Chat {
      */
     private List<String> loadWord() {
         List<String> result = new ArrayList<>();
-        try (BufferedReader read = new BufferedReader(new FileReader("./chapter_006/data/list.txt"))) {
+        try (BufferedReader read = new BufferedReader(new FileReader(WORDS_BASE_PATH))) {
             String line;
             while ((line = read.readLine()) != null) {
-                    result.add(line);
+                result.add(line);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -74,5 +57,43 @@ public class Chat {
      */
     private void typing(String word) {
         System.out.println(word);
+    }
+
+    /**
+     * записываем в логфайл.
+     * @param word входящая информация.
+     */
+    private void writing(String word) {
+        try (PrintWriter out = new PrintWriter(new FileOutputStream(LOG_PATH, true))) {
+            out.println(word);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Инициализируем чат.
+     */
+    private void init() {
+        Chat chat = new Chat();
+        String answer = "";
+        System.out.println("Stat chatting");
+        List<String> listWords = chat.loadWord();
+        do {
+            int getPosition = random.nextInt(listWords.size());
+            answer = chat.ask();
+            chat.writing(answer);
+            if (!answer.equals(STOP) && !stopWord.equals(STOP) && !answer.equals(EXIT)) {
+                chat.typing(listWords.get(getPosition));
+                chat.writing(listWords.get(getPosition));
+            } else {
+                stopWord = STOP;
+            }
+            if (answer.equals(CONT)) {
+                stopWord = CONT;
+                chat.typing(listWords.get(getPosition));
+                chat.writing(listWords.get(getPosition));
+            }
+        } while (!answer.equals(EXIT));
     }
 }
