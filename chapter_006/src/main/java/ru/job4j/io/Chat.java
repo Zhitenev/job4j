@@ -81,19 +81,20 @@ public class Chat {
         List<String> listWords = chat.loadWord();
         do {
             int getPosition = random.nextInt(listWords.size());
+            String word = listWords.get(getPosition);
             answer = chat.ask();
             chat.writing(answer);
-            if (!answer.equals(STOP) && !stopWord.equals(STOP) && !answer.equals(EXIT)) {
-                chat.typing(listWords.get(getPosition));
-                chat.writing(listWords.get(getPosition));
+            if (!STOP.equals(answer) && !STOP.equals(stopWord) && !EXIT.equals(answer)) {
+                chat.typing(word);
+                chat.writing(word);
             } else {
                 stopWord = STOP;
             }
-            if (answer.equals(CONT)) {
+            if (CONT.equals(answer)) {
                 stopWord = CONT;
-                chat.typing(listWords.get(getPosition));
-                chat.writing(listWords.get(getPosition));
+                chat.typing(word);
+                chat.writing(word);
             }
-        } while (!answer.equals(EXIT));
+        } while (!EXIT.equals(answer));
     }
 }
