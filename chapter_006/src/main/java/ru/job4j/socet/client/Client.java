@@ -31,9 +31,10 @@ public class Client {
             do {
                 line = input.ask();
                 out.println(line);
-                String outLine;
+                String outLine = "outText";
                 if (!EXIT.equals(line)) {
-                    while (!(outLine = in.readLine()).isEmpty()) {
+                    while (!(outLine.isEmpty())) {
+                        outLine = in.readLine();
                         System.out.println(outLine);
                     }
                 }
