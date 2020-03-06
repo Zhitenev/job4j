@@ -24,6 +24,8 @@
 *.tar.gz
 *.rar
 
+# System
+*.ini
 
 #maven path
 target
